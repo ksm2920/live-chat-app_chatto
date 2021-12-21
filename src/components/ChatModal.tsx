@@ -26,7 +26,7 @@ const ChatModal = () => {
         setNewMessage(e.target.value);
     }
 
-    return <div>
+    return <div className="chat-modal">
         <button onClick={() => {
             createNewChat();
             setShow(false);
