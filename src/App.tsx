@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AgentPage from './components/AgentPage';
 import ChatModal from './components/ChatModal';
 import Home from './components/Home';
+import './components/style/style.scss';
 
-function App() {
+function App(): JSX.Element {
   return (
     <div className="App">
       <BrowserRouter>
