@@ -1,5 +1,8 @@
 const ChatModal = () => {
-    return <div>Chat modal</div>
+    return <div>
+        <h1>Chat modal</h1>
+        <div className="chat-box"></div>
+    </div>
 }
 
 export default ChatModal;
