@@ -1,4 +1,4 @@
-import React from 'react';
+import 'firebase/compat/firestore';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AgentPage from './components/AgentPage';
 import ChatModal from './components/ChatModal';
