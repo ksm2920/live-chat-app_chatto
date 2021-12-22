@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
