@@ -42,6 +42,12 @@ body {
             cursor: pointer;
         }
     }
+    .chat-body {
+        li {
+            list-style: none;
+        }
+        text-align: left;
+    }
     .message-input {
         position: absolute;
         bottom: 10px;

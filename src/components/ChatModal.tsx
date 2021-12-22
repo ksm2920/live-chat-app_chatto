@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
+import MessageItem from "./MessageItem";
 
 const ChatModal = () => {
     const [show, setShow] = useState(true);
@@ -17,7 +18,7 @@ const ChatModal = () => {
             created: new Date()
         })
         setChatId(chatNum);
-        subscribeMessage(chatId);
+        subscribeMessage(chatNum);
     }
 
     const subscribeMessage = (chatId: string) => {
@@ -59,9 +60,12 @@ const ChatModal = () => {
                     <button className="leave-btn" onClick={deleteChat}>X</button>
                 </div>
                 <h1>{chatId}</h1>
+            </div>
+            <div className="chat-body">
                 <ul>
-                    {messages.map(m =>(
+                    {messages.map(m => (
                         <li key={m.id}>
+                            <MessageItem message={m} />
                         </li>
                     ))}
                 </ul>
