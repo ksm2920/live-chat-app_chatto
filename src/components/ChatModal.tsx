@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { FireClient } from "../FireClient";
+import { Message } from "../models/Message";
 
 const ChatModal = () => {
     const [show, setShow] = useState(true);
     const [showBtn, setShowBtn] = useState(false);
     const [chatId, setChatId] = useState("");
     const [newMessage, setNewMessage] = useState("");
+    const [messages, setMessages] = useState<Message[]>([]);
 
     const createNewChat = () => {
         let random = Math.floor(Math.random() * 100) + 1;
@@ -15,6 +17,13 @@ const ChatModal = () => {
             created: new Date()
         })
         setChatId(chatNum);
+        subscribeMessage(chatId);
+    }
+
+    const subscribeMessage = (chatId: string) => {
+        return FireClient.subscribeToMessages(chatId, (messages) => {
+            setMessages(messages);
+        })
     }
 
     const handleOnChange = (e: any) => {
@@ -50,6 +59,12 @@ const ChatModal = () => {
                     <button className="leave-btn" onClick={deleteChat}>X</button>
                 </div>
                 <h1>{chatId}</h1>
+                <ul>
+                    {messages.map(m =>(
+                        <li key={m.id}>
+                        </li>
+                    ))}
+                </ul>
             </div>
             <div className="message-input">
                 <form onSubmit={handelOnSubmit}>

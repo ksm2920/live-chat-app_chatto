@@ -24,6 +24,26 @@ export class FireClient {
         await FireClient.db.collection("chats").doc(chatId)
         .collection("messages").add(Utils.plain(message))
     }
+
+    static subscribeToMessages(chatId: string, handler: (messages: Message []) => void) {
+        if(!FireClient.db)
+        return;
+
+        return FireClient.db
+        .collection("chats")
+        .doc(chatId)
+        .collection("messages")
+        .orderBy("createdAt")
+        .limit(100)
+        .onSnapshot((querySnaps) => {
+            const messages = querySnaps.docs.map(doc => ({
+                ...doc.data(),
+                id: doc.id,
+            } as Message))
+
+            handler(messages);
+        })
+    }
 }
 
 export class Utils {
