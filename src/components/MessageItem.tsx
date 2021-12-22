@@ -1,4 +1,3 @@
-import { formatRelative, subDays } from "date-fns";
 import { FunctionComponent, useState } from "react";
 import { Message } from "../models/Message";
 
