@@ -1,4 +1,5 @@
 import firebase from "firebase/compat/app";
+import { Chat } from "./models/Chat";
 import { Message } from "./models/Message";
 
 firebase.initializeApp({
@@ -14,35 +15,52 @@ export class FireClient {
     static db = firebase.firestore();
 
     static async postMessage(text: string, chatId: string) {
-        if(!FireClient.db) 
-        return;
+        if (!FireClient.db)
+            return;
 
         let message = new Message();
         message.text = text;
         message.chatId = chatId;
 
         await FireClient.db.collection("chats").doc(chatId)
-        .collection("messages").add(Utils.plain(message))
+            .collection("messages").add(Utils.plain(message))
     }
 
-    static subscribeToMessages(chatId: string, handler: (messages: Message []) => void) {
-        if(!FireClient.db)
-        return;
+    static subscribeToMessages(chatId: string, handler: (messages: Message[]) => void) {
+        if (!FireClient.db)
+            return;
 
         return FireClient.db
-        .collection("chats")
-        .doc(chatId)
-        .collection("messages")
-        .orderBy("createdAt")
-        .limit(100)
-        .onSnapshot((querySnaps) => {
-            const messages = querySnaps.docs.map(doc => ({
-                ...doc.data(),
-                id: doc.id,
-            } as Message))
+            .collection("chats")
+            .doc(chatId)
+            .collection("messages")
+            .orderBy("createdAt")
+            .limit(100)
+            .onSnapshot((querySnaps) => {
+                const messages = querySnaps.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id,
+                } as Message))
 
-            handler(messages);
-        })
+                handler(messages);
+            })
+    }
+
+    static subscribeToChats(handler: (chats: Chat[]) => void) {
+        if (!FireClient.db)
+            return;
+
+        return FireClient.db
+            .collection("chats")
+            .orderBy("created")
+            .limit(100)
+            .onSnapshot((querySnapshot) => {
+                const chats = querySnapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id,
+                } as Chat))
+                handler(chats);
+            })
     }
 }
 

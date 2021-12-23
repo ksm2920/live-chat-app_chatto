@@ -3,6 +3,11 @@
 body {
     font-family: sans-serif;
 }
+
+li {
+    list-style: none;
+}
+
 .chat-modal {
     margin-top: 30vh;
     float: right;
@@ -45,9 +50,6 @@ body {
     .chat-body {
         max-height: 380px;
         overflow-y: auto;
-        li {
-            list-style: none;
-        }
         text-align: left;
     }
     .message-input {
