@@ -84,9 +84,7 @@ const AgentPage = () => {
                 <div className="clear"></div>
 
             </div>
-            <div className="footer"></div>
-
-
+            {/* <div className="footer"></div> */}
         </div>
 
 
