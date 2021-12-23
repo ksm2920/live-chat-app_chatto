@@ -3,16 +3,25 @@ import { FireClient } from "../FireClient";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
+import { useNavigate } from "react-router-dom";
 
 const AgentPage = () => {
     const [show, setShow] = useState(true);
+    const [showOngoing, setShowOngoing] = useState(false);
+    const [showArchived, setShowArchived] = useState(true);
     const [chatId, setChatId] = useState("");
     const [ongoingChats, setOngoingChats] = useState<Chat[]>([]);
+    const [archivedChats, setArchivedChats] = useState<Chat[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState("");
+    let navigate = useNavigate();
+
     useEffect(() => {
-        return FireClient.subscribeToChats(chats => {
+        FireClient.subscribeToOngoingChats(chats => {
             setOngoingChats(chats)
+        })
+        FireClient.subscribeToArchivedChats(chats => {
+            setArchivedChats(chats)
         })
     }, [chatId])
 
@@ -32,27 +41,57 @@ const AgentPage = () => {
         setNewMessage(e.target.value);
     }
 
+    const archiveChat = async () => {
+        await FireClient.db.collection("chats").doc(chatId).update({ archived: true })
+        setShow(true);
+    }
+    
+    const showOngoingChats = () => {
+        setShowOngoing(false)
+        setShowArchived(true)
+    }
+
+    const showArchivedChats = () => {
+        setShowArchived(false)
+        setShowOngoing(true)
+    }
     return <>
         <div className="wrap">
             <div className="header"></div>
             <div className="container">
                 <div className="left">
-                <h1>Chats</h1>
-                    <h2>Ongoing chats</h2>
+                    <h1>Chats</h1>
                     <div>
-                        {ongoingChats.map(c => (
-                            <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
-                                {c.id}
-                            </div>
-                        ))}
+                        <div onClick={showOngoingChats} className="ongoing">Ongoing chats</div>
+                        <div onClick={showArchivedChats} className="archived">Archived</div>
                     </div>
+                    <div hidden={showOngoing}>
+                        <div>
+                            {ongoingChats.map(c => (
+                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
+                                    {c.id}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div hidden={showArchived}>
+                        <div>
+                            {archivedChats.map(c => (
+                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
+                                    {c.id}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
 
                 </div>
                 <div className="right">
                     <div className="chat-box-agent" hidden={show}>
                         <div className="chat-header">
                             <div>
-                                {/* <button className="leave-btn" onClick={deleteChat}>X</button> */}
+                                <button className="leave-btn" onClick={archiveChat}>X</button>
                             </div>
                             <h1>{chatId}</h1>
                         </div>

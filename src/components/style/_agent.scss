@@ -26,6 +26,9 @@
         padding: 20px 0;
         cursor: pointer;
     }
+    .ongoing, .archived {
+        float: left;
+    }
 }
 .right{
 	width:70vw;

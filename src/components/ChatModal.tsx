@@ -16,7 +16,8 @@ const ChatModal = () => {
         const chatNum = "Chat " + random;
         FireClient.db.collection("chats").doc(chatNum).set({
             id: chatNum,
-            created: new Date()
+            created: new Date(),
+            archived: false
         })
         setChatId(chatNum);
         subscribeMessage(chatNum);

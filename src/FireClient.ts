@@ -46,12 +46,31 @@ export class FireClient {
             })
     }
 
-    static subscribeToChats(handler: (chats: Chat[]) => void) {
+    static subscribeToOngoingChats(handler: (chats: Chat[]) => void) {
         if (!FireClient.db)
             return;
 
         return FireClient.db
             .collection("chats")
+            .where("archived", "==", false)
+            .orderBy("created")
+            .limit(100)
+            .onSnapshot((querySnapshot) => {
+                const chats = querySnapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id,
+                } as Chat))
+                handler(chats);
+            })
+    }
+
+    static subscribeToArchivedChats(handler: (chats: Chat[]) => void) {
+        if (!FireClient.db)
+            return;
+
+        return FireClient.db
+            .collection("chats")
+            .where("archived", "==", true)
             .orderBy("created")
             .limit(100)
             .onSnapshot((querySnapshot) => {
