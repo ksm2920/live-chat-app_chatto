@@ -14,8 +14,8 @@ const AgentPage = () => {
         return FireClient.subscribeToChats(chats => {
             setOngoingChats(chats)
         })
-    },[chatId])
-    
+    }, [chatId])
+
     const openChat = (chatId: string) => {
         return FireClient.subscribeToMessages(chatId, (messages) => {
             setMessages(messages);
@@ -33,47 +33,62 @@ const AgentPage = () => {
     }
 
     return <>
-        <h1>Agent page</h1>
-        <ul>
-            {ongoingChats.map(c => (
-                <li key={c.id}>
-                    <button onClick={() => {openChat(c.id!); setShow(false); setChatId(c.id!)}}>{c.id}</button>
-                </li>
-            ))}
-        </ul>
-        <div className="chat-box" hidden={show}>
-            <div className="chat-header">
-                <div>
-                    {/* <button className="leave-btn" onClick={deleteChat}>X</button> */}
+        <div className="wrap">
+            <div className="header"></div>
+            <div className="container">
+                <div className="left">
+                <h1>Chats</h1>
+                    <h2>Ongoing chats</h2>
+                    <div>
+                        {ongoingChats.map(c => (
+                            <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
+                                {c.id}
+                            </div>
+                        ))}
+                    </div>
+
                 </div>
-                <h1>{chatId}</h1>
-            </div>
-            <div className="chat-body">
-                <ul>
-                    {messages.map(m => (
-                        <li key={m.id}>
-                            <MessageItem message={m} />
-                        </li>
-                    ))}
-                </ul>
-                {/* <div ref={messagesEndRef} /> */}
-            </div>
-           
-            <div className="message-input">
-                <form onSubmit={handelOnSubmit}>
-                    <input
-                        type="text"
-                        value={newMessage}
-                        onChange={handleOnChange}
-                        placeholder="Write a message"
-                    />
-                    {/* <button type="submit" disabled={!newMessage}>
+                <div className="right">
+                    <div className="chat-box-agent" hidden={show}>
+                        <div className="chat-header">
+                            <div>
+                                {/* <button className="leave-btn" onClick={deleteChat}>X</button> */}
+                            </div>
+                            <h1>{chatId}</h1>
+                        </div>
+                        <div className="chat-body">
+                            <ul>
+                                {messages.map(m => (
+                                    <li key={m.id}>
+                                        <MessageItem message={m} />
+                                    </li>
+                                ))}
+                            </ul>
+                            {/* <div ref={messagesEndRef} /> */}
+                        </div>
+                        <div className="message-input">
+                            <form onSubmit={handelOnSubmit}>
+                                <input
+                                    type="text"
+                                    value={newMessage}
+                                    onChange={handleOnChange}
+                                    placeholder="Write a message"
+                                />
+                                {/* <button type="submit" disabled={!newMessage}>
                         Send
                     </button> */}
-                </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div className="clear"></div>
+
             </div>
+            <div className="footer"></div>
+
 
         </div>
+
 
     </>
 
