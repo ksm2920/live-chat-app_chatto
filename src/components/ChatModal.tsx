@@ -6,6 +6,7 @@ import MessageItem from "./MessageItem";
 const ChatModal = () => {
     const [show, setShow] = useState(true);
     const [showBtn, setShowBtn] = useState(false);
+    const [showModal, setShowModal] = useState(showChatModal(window.location.pathname));
     const [chatId, setChatId] = useState("");
     const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
@@ -50,50 +51,60 @@ const ChatModal = () => {
     }
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth"});
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-    return <div className="chat-modal">
-        <div className="support-btn" hidden={showBtn}>
-            <button onClick={() => {
-                createNewChat();
-                setShow(false);
-                setShowBtn(true);
-            }}>Support</button>
-        </div>
-        <div className="chat-box" hidden={show}>
-            <div className="chat-header">
-                <div>
-                    <button className="leave-btn" onClick={deleteChat}>X</button>
+
+    if (showModal)
+        return (
+            <div className="chat-modal">
+                <div className="support-btn" hidden={showBtn}>
+                    <button onClick={() => {
+                        createNewChat();
+                        setShow(false);
+                        setShowBtn(true);
+                    }}>Support</button>
                 </div>
-                <h1>{chatId}</h1>
-            </div>
-            <div className="chat-body">
-                <ul>
-                    {messages.map(m => (
-                        <li key={m.id}>
-                            <MessageItem message={m} />
-                        </li>
-                    ))}
-                </ul>
-                <div ref={messagesEndRef} />
-            </div>
-           
-            <div className="message-input">
-                <form onSubmit={handelOnSubmit}>
-                    <input
-                        type="text"
-                        value={newMessage}
-                        onChange={handleOnChange}
-                        placeholder="Write a message"
-                    />
-                    {/* <button type="submit" disabled={!newMessage}>
+                <div className="chat-box" hidden={show}>
+                    <div className="chat-header">
+                        <div>
+                            <button className="leave-btn" onClick={deleteChat}>X</button>
+                        </div>
+                        <h1>{chatId}</h1>
+                    </div>
+                    <div className="chat-body">
+                        <ul>
+                            {messages.map(m => (
+                                <li key={m.id}>
+                                    <MessageItem message={m} />
+                                </li>
+                            ))}
+                        </ul>
+                        <div ref={messagesEndRef} />
+                    </div>
+
+                    <div className="message-input">
+                        <form onSubmit={handelOnSubmit}>
+                            <input
+                                type="text"
+                                value={newMessage}
+                                onChange={handleOnChange}
+                                placeholder="Write a message"
+                            />
+                            {/* <button type="submit" disabled={!newMessage}>
                         Send
                     </button> */}
-                </form>
-            </div>
+                        </form>
+                    </div>
 
-        </div>
-    </div>
+                </div>
+            </div>
+        )
+        else
+        return<></>
+
+        function showChatModal(pathname: string) {
+            return ["/"].includes(pathname);
+        }
 }
 
 export default ChatModal;
