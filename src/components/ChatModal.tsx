@@ -44,6 +44,7 @@ const ChatModal = () => {
     const closeChat = async () => {
         await FireClient.db.collection("chats").doc(chatId).update({ archived: true})
         setShow(true);
+        setShowBtn(false);
         // let docRef = await FireClient.db.collection("chats").doc(chatId).collection("messages");
         // docRef.get().then((querySnapshot) => {
         //     Promise.all(querySnapshot.docs.map((d) => d.ref.delete()));

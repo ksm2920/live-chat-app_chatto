@@ -14,6 +14,7 @@
 	float:left;
     padding: 0 20px;
 	background:rgb(192, 192, 192);
+    overflow-y: auto;
     h1 {
         text-align: center;
         font-size: 25px;
@@ -26,12 +27,16 @@
         padding: 20px 0;
         cursor: pointer;
     }
-    .ongoing, .archived {
+    .ongoing {
         float: left;
+    }
+
+    .archived {
+        float: right;
     }
 }
 .right{
-	width:69vw;
+	width:67vw;
 	float:left;
     .chat-box-agent {
         text-align: center;

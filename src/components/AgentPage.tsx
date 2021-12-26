@@ -66,7 +66,7 @@ const AgentPage = () => {
                 <div className="left">
                     <h1>Chats</h1>
                     <div>
-                        <div onClick={showOngoingChats} className="ongoing">Ongoing chats</div>
+                        <div onClick={showOngoingChats} className="ongoing">Ongoing</div>
                         <div onClick={showArchivedChats} className="archived">Archived</div>
                     </div>
                     <div hidden={showOngoing}>
