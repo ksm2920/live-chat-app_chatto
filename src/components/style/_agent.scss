@@ -10,7 +10,7 @@
 
 .left{
 	width:25vw;
-	height:100vh;
+	height:86vh;
 	float:left;
     padding: 0 20px;
 	background:rgb(192, 192, 192);
@@ -31,7 +31,7 @@
     }
 }
 .right{
-	width:70vw;
+	width:69vw;
 	float:left;
     .chat-box-agent {
         text-align: center;
@@ -45,6 +45,7 @@
                 margin: 0;
                 font-size: 25px;
                 text-align: left;
+                margin-left: 15px;
             }
             .leave-btn {
                 position: absolute;
@@ -59,7 +60,7 @@
             }
         }
         .chat-body {
-            max-height: 62vh;
+            max-height: 70vh;
             overflow-y: auto;
             text-align: left;
         }

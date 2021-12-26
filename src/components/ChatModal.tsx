@@ -41,13 +41,14 @@ const ChatModal = () => {
         setNewMessage("");
     }
 
-    const deleteChat = async () => {
-        let docRef = await FireClient.db.collection("chats").doc(chatId).collection("messages");
-        docRef.get().then((querySnapshot) => {
-            Promise.all(querySnapshot.docs.map((d) => d.ref.delete()));
-        })
-        await FireClient.db.collection("chats").doc(chatId).delete();
-        window.location.reload();
+    const closeChat = async () => {
+        await FireClient.db.collection("chats").doc(chatId).update({ archived: true})
+        setShow(true);
+        // let docRef = await FireClient.db.collection("chats").doc(chatId).collection("messages");
+        // docRef.get().then((querySnapshot) => {
+        //     Promise.all(querySnapshot.docs.map((d) => d.ref.delete()));
+        // })
+        // await FireClient.db.collection("chats").doc(chatId).delete();
     }
 
     const scrollToBottom = () => {
@@ -67,7 +68,7 @@ const ChatModal = () => {
                 <div className="chat-box" hidden={show}>
                     <div className="chat-header">
                         <div>
-                            <button className="leave-btn" onClick={deleteChat}>X</button>
+                            <button className="leave-btn" onClick={closeChat}>X</button>
                         </div>
                         <h1>{chatId}</h1>
                     </div>

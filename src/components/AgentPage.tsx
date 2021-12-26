@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FireClient } from "../FireClient";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
-import { useNavigate } from "react-router-dom";
 
 const AgentPage = () => {
     const [show, setShow] = useState(true);
@@ -14,7 +13,7 @@ const AgentPage = () => {
     const [archivedChats, setArchivedChats] = useState<Chat[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState("");
-    let navigate = useNavigate();
+    const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
     useEffect(() => {
         FireClient.subscribeToOngoingChats(chats => {
@@ -28,6 +27,7 @@ const AgentPage = () => {
     const openChat = (chatId: string) => {
         return FireClient.subscribeToMessages(chatId, (messages) => {
             setMessages(messages);
+            scrollToBottom();
         })
     }
 
@@ -54,6 +54,10 @@ const AgentPage = () => {
     const showArchivedChats = () => {
         setShowArchived(false)
         setShowOngoing(true)
+    }
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
     return <>
         <div className="wrap">
@@ -84,8 +88,6 @@ const AgentPage = () => {
                         </div>
                     </div>
 
-
-
                 </div>
                 <div className="right">
                     <div className="chat-box-agent" hidden={show}>
@@ -103,7 +105,7 @@ const AgentPage = () => {
                                     </li>
                                 ))}
                             </ul>
-                            {/* <div ref={messagesEndRef} /> */}
+                            <div ref={messagesEndRef} />
                         </div>
                         <div className="message-input">
                             <form onSubmit={handelOnSubmit}>
