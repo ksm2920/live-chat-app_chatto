@@ -1,4 +1,4 @@
-@mixin text-box {
+@mixin message-box {
     overflow-y: auto;
     text-align: left;
     p {
@@ -10,4 +10,29 @@
     span {
         margin: 20px;
     }
+}
+
+@mixin message-input {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    input {
+        border: none;
+        border-radius: 30px;
+        box-shadow: 1px 1px 5px #bdbdbd;
+        padding:10px;
+    }
+    button {
+        padding: 5px;
+    }
+}
+
+@mixin archive-btn {
+    position: absolute;
+    top:15px;
+    right:10px;
+    padding: 5px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
 }

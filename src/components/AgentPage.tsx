@@ -63,7 +63,7 @@ const AgentPage = () => {
         <div className="wrap">
             <div className="header"></div>
             <div className="container">
-                <div className="left">
+                <div className="chat-list-left">
                     <h1>Chats</h1>
                     <div>
                         <div onClick={showOngoingChats} className="ongoing">Ongoing</div>
@@ -89,7 +89,7 @@ const AgentPage = () => {
                     </div>
 
                 </div>
-                <div className="right">
+                <div className="chat-box-right">
                     <div className="chat-box-agent" hidden={show}>
                         <div className="chat-header">
                             <div>

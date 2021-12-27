@@ -10,7 +10,7 @@
 	background:#5298B0;
 }
 
-.left{
+.chat-list-left{
 	width:25vw;
 	height:86vh;
 	float:left;
@@ -37,7 +37,7 @@
         float: right;
     }
 }
-.right{
+.chat-box-right{
 	width:67vw;
 	float:left;
     .chat-box-agent {
@@ -55,34 +55,20 @@
                 margin-left: 15px;
             }
             .leave-btn {
-                position: absolute;
-                top:15px;
-                right:10px;
-                padding: 5px;
-                border: none;
-                font-size: 20px;
-                cursor: pointer;
+              @include archive-btn;
             }
         }
         .chat-body {
             max-height: 70vh;
-            @include text-box
+            @include message-box
         }
         .message-input {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
+            @include message-input;
             input {
-                border: none;
-                border-radius: 30px;
-                box-shadow: 1px 1px 5px #bdbdbd;
-                padding:10px;
                 width: 90%;
             }
-            button {
-                padding: 5px;
-            }
         }
+
     }
 }
 .clear{

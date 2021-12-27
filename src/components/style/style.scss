@@ -41,34 +41,19 @@ li {
             color: white;
         }
         .leave-btn {
-            position: absolute;
-            top:15px;
-            right:10px;
-            padding: 5px;
+            @include archive-btn;
             background-color: #5298B0;
-            border: none;
             color:white;
-            font-size: 20px;
-            cursor: pointer;
         }
     }
     .chat-body {
         max-height: 380px;
-       @include text-box;
+       @include message-box;
     }
     .message-input {
-        position: absolute;
-        bottom: 10px;
-        width: 100%;
+        @include message-input;
         input {
-            border: none;
-            border-radius: 30px;
-            box-shadow: 1px 1px 5px #bdbdbd;
-            padding:10px;
             width: 80%;
-        }
-        button {
-            padding: 5px;
         }
     }
 }
