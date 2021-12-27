@@ -42,7 +42,7 @@ const ChatModal = () => {
     }
 
     const closeChat = async () => {
-        await FireClient.db.collection("chats").doc(chatId).update({ archived: true})
+        await FireClient.db.collection("chats").doc(chatId).update({ archived: true })
         setShow(true);
         setShowBtn(false);
         // let docRef = await FireClient.db.collection("chats").doc(chatId).collection("messages");
@@ -92,21 +92,21 @@ const ChatModal = () => {
                                 onChange={handleOnChange}
                                 placeholder="Write a message"
                             />
-                            {/* <button type="submit" disabled={!newMessage}>
-                        Send
-                    </button> */}
+                            <button type="submit" disabled={!newMessage}>
+                                Send
+                            </button>
                         </form>
                     </div>
 
                 </div>
             </div>
         )
-        else
-        return<></>
+    else
+        return <></>
 
-        function showChatModal(pathname: string) {
-            return ["/"].includes(pathname);
-        }
+    function showChatModal(pathname: string) {
+        return ["/"].includes(pathname);
+    }
 }
 
 export default ChatModal;

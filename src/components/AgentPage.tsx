@@ -75,7 +75,7 @@ const AgentPage = () => {
                     <div hidden={showOngoing}>
                         <div className="list">
                             {ongoingChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!);}} className={chatId === c.id? "selected": "normal"}>
+                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
                                     {c.id}
                                 </div>
                             ))}
@@ -84,7 +84,7 @@ const AgentPage = () => {
                     <div hidden={showArchived}>
                         <div className="list">
                             {archivedChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!);}} className={chatId === c.id? "selected": "normal"}>
+                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
                                     {c.id}
                                 </div>
                             ))}
@@ -117,9 +117,9 @@ const AgentPage = () => {
                                     onChange={handleOnChange}
                                     placeholder="Write a message"
                                 />
-                                {/* <button type="submit" disabled={!newMessage}>
-                        Send
-                    </button> */}
+                                <button type="submit" disabled={!newMessage}>
+                                    Send
+                                </button>
                             </form>
                         </div>
                     </div>

@@ -1,0 +1,43 @@
+@import 'mixins';
+
+.chat-modal {
+    margin-top: 30vh;
+    float: right;
+    margin-right: 30px;
+}
+
+.chat-box {
+    text-align: center;
+    width: 320px;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px #bdbdbd;
+    position: relative;
+    .chat-header {
+        position: relative;
+        background-color: #5298B0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 5%;
+        h1 {
+            margin: 0;
+            font-size: 25px;
+            color: white;
+        }
+        .leave-btn {
+            @include archive-btn;
+            background-color: #5298B0;
+            color:white;
+        }
+    }
+    .chat-body {
+        max-height: 380px;
+       @include message-box;
+    }
+    .message-input {
+        @include message-input;
+        input {
+            width: 80%;
+        }
+    }
+}
