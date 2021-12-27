@@ -69,14 +69,14 @@ const AgentPage = () => {
                 <div className="chat-list-left">
                     <h1>Chats</h1>
                     <div>
-                        <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>Ongoing</div>
-                        <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "selected archived"}>Archived</div>
+                        <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "bold ongoing"}><a>Ongoing</a></div>
+                        <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "bold archived"}><a>Archived</a></div>
                     </div>
                     <div hidden={showOngoing}>
                         <div className="list">
                             {ongoingChats.map(c => (
                                 <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
-                                    {c.id}
+                                   {c.id}
                                 </div>
                             ))}
                         </div>

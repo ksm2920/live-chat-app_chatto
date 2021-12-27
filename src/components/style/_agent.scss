@@ -32,19 +32,23 @@
     .ongoing {
         float: left;
         @include border-top-radius;
-        padding: 20px;
+        @include aTag-hover;
     }
 
     .archived {
         float: right;
         @include border-top-radius;
-        padding: 20px;
+       @include aTag-hover;
     }
 }
 
 .selected {
     font-weight: bold;
-    background-color: gray;
+    background-color: lightgray;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .normal {
@@ -52,8 +56,13 @@
 }
 
 .list {
-    background-color: gray;
-    border-radius: 5px; 
+    border-radius: 5px;
+    div {
+        padding: 20px;
+        &:hover {
+            background-color: lightgray;
+        }
+    }
 }
 
 .chat-box-right{

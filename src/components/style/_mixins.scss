@@ -46,3 +46,12 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
+@mixin aTag-hover {
+    a {
+        padding:20px;
+    }
+    a:hover {
+        background-color: lightgray;
+    }
+}
