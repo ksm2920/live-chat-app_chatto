@@ -45,7 +45,7 @@ const AgentPage = () => {
         await FireClient.db.collection("chats").doc(chatId).update({ archived: true })
         setShow(true);
     }
-    
+
     const showOngoingChats = () => {
         setShowOngoing(false)
         setShowArchived(true)
@@ -59,6 +59,7 @@ const AgentPage = () => {
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
+
     return <>
         <div className="wrap">
             <div className="header"></div>
@@ -66,11 +67,11 @@ const AgentPage = () => {
                 <div className="chat-list-left">
                     <h1>Chats</h1>
                     <div>
-                        <div onClick={showOngoingChats} className="ongoing">Ongoing</div>
-                        <div onClick={showArchivedChats} className="archived">Archived</div>
+                        <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>Ongoing</div>
+                        <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "selected archived"}>Archived</div>
                     </div>
                     <div hidden={showOngoing}>
-                        <div>
+                        <div className="list">
                             {ongoingChats.map(c => (
                                 <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
                                     {c.id}
@@ -79,7 +80,7 @@ const AgentPage = () => {
                         </div>
                     </div>
                     <div hidden={showArchived}>
-                        <div>
+                        <div className="list">
                             {archivedChats.map(c => (
                                 <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
                                     {c.id}
@@ -87,7 +88,6 @@ const AgentPage = () => {
                             ))}
                         </div>
                     </div>
-
                 </div>
                 <div className="chat-box-right">
                     <div className="chat-box-agent" hidden={show}>

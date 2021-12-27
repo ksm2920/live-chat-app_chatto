@@ -37,6 +37,20 @@
         float: right;
     }
 }
+
+.selected {
+    font-weight: bold;
+    background-color: gray;
+}
+
+.normal {
+    font-weight: normal;
+}
+
+.list {
+    background-color: gray;
+}
+
 .chat-box-right{
 	width:67vw;
 	float:left;
