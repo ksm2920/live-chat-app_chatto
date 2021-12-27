@@ -4,6 +4,11 @@ body {
     font-family: sans-serif;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 li {
     list-style: none;
 }
@@ -51,6 +56,15 @@ li {
         max-height: 380px;
         overflow-y: auto;
         text-align: left;
+        p {
+            background-color: rgb(223, 223, 223);
+            border-radius: 5px;
+            padding: 10px;
+            margin:10px; 
+        }
+        span {
+            margin: 20px;
+        }
     }
     .message-input {
         position: absolute;
