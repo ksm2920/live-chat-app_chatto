@@ -1,4 +1,4 @@
-@import 'responsive', 'agent';
+@import 'layout', 'agent', 'mixins';
 
 body {
     font-family: sans-serif;
@@ -54,17 +54,7 @@ li {
     }
     .chat-body {
         max-height: 380px;
-        overflow-y: auto;
-        text-align: left;
-        p {
-            background-color: rgb(223, 223, 223);
-            border-radius: 5px;
-            padding: 10px;
-            margin:10px; 
-        }
-        span {
-            margin: 20px;
-        }
+       @include text-box;
     }
     .message-input {
         position: absolute;
