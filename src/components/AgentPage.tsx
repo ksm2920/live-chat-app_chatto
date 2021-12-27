@@ -49,11 +49,13 @@ const AgentPage = () => {
     const showOngoingChats = () => {
         setShowOngoing(false)
         setShowArchived(true)
+        setShow(true);
     }
 
     const showArchivedChats = () => {
         setShowArchived(false)
         setShowOngoing(true)
+        setShow(true);
     }
 
     const scrollToBottom = () => {
@@ -73,7 +75,7 @@ const AgentPage = () => {
                     <div hidden={showOngoing}>
                         <div className="list">
                             {ongoingChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
+                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!);}} className={chatId === c.id? "selected": "normal"}>
                                     {c.id}
                                 </div>
                             ))}
@@ -82,7 +84,7 @@ const AgentPage = () => {
                     <div hidden={showArchived}>
                         <div className="list">
                             {archivedChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!) }}>
+                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!);}} className={chatId === c.id? "selected": "normal"}>
                                     {c.id}
                                 </div>
                             ))}

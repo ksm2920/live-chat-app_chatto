@@ -11,10 +11,10 @@
 }
 
 .chat-list-left{
-	width:25vw;
+	width:30vw;
 	height:86vh;
 	float:left;
-    padding: 0 20px;
+    padding-bottom: 20px;
 	background:rgb(192, 192, 192);
     overflow-y: auto;
     h1 {
@@ -31,10 +31,14 @@
     }
     .ongoing {
         float: left;
+        @include border-top-radius;
+        padding: 20px;
     }
 
     .archived {
         float: right;
+        @include border-top-radius;
+        padding: 20px;
     }
 }
 
@@ -49,6 +53,7 @@
 
 .list {
     background-color: gray;
+    border-radius: 5px; 
 }
 
 .chat-box-right{
