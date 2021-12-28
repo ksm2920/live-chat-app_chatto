@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
@@ -73,32 +74,32 @@ const AgentPage = () => {
                         <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "bold archived"}><a>Archived</a></div>
                     </div>
                     <div>
-                    <div hidden={showOngoing}>
-                        <div className="list">
-                            {ongoingChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
-                                   {c.id}
-                                </div>
-                            ))}
+                        <div hidden={showOngoing}>
+                            <div className="list">
+                                {ongoingChats.map(c => (
+                                    <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
+                                        {c.id}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div hidden={showArchived}>
+                            <div className="list">
+                                {archivedChats.map(c => (
+                                    <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
+                                        {c.id}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                    <div hidden={showArchived}>
-                        <div className="list">
-                            {archivedChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
-                                    {c.id}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    </div>
-                  
+
                 </div>
                 <div className="chat-box-right">
                     <div className="chat-box-agent" hidden={show}>
                         <div className="chat-header">
                             <div>
-                                <button className="leave-btn" onClick={archiveChat}>X</button>
+                                <button className="leave-btn" onClick={archiveChat}><RiCloseFill/></button>
                             </div>
                             <h1>{chatId}</h1>
                         </div>
@@ -121,7 +122,7 @@ const AgentPage = () => {
                                     placeholder="Write a message"
                                 />
                                 <button type="submit" disabled={!newMessage}>
-                                    Send
+                                    <RiSendPlaneFill />
                                 </button>
                             </form>
                         </div>

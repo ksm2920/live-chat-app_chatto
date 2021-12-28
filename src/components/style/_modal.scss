@@ -37,7 +37,11 @@
     .message-input {
         @include message-input;
         input {
-            width: 80%;
+            width: 85%;
+        }
+        button {
+            right: 6%;
+            border-radius: 30%;
         }
     }
 }

@@ -1,3 +1,4 @@
+@import 'layout';
 @mixin message-box {
     overflow-y: auto;
     text-align: left;
@@ -24,21 +25,23 @@
         padding:10px;
     }
     button {
-        padding: 8px;
+        // padding: 8px;
         position: absolute;
-        top: 0;
-        right: 19px;
-        border-radius: 30px;
+        top: 7px;
+        border: none;
+        background-color: white;
+        font-size: 20px;
+        border-radius: 30%;
     }
 }
 
 @mixin archive-btn {
     position: absolute;
     right:10px;
-    padding: 5px;
     border: none;
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
+    background-color: white;
 }
 
 @mixin border-top-radius {
@@ -46,11 +49,11 @@
     border-top-right-radius: 5px;
 }
 
-@mixin aTag-hover {
+@mixin hover {
     a {
         padding:20px;
-    }
-    a:hover {
-        background-color: #b8d1da;;
+        &:hover {
+            background-color: #b8d1da;
+        }
     }
 }

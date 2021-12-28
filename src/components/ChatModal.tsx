@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
+import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 
 const ChatModal = () => {
     const [show, setShow] = useState(true);
@@ -69,7 +70,7 @@ const ChatModal = () => {
                 <div className="chat-box" hidden={show}>
                     <div className="chat-header">
                         <div>
-                            <button className="leave-btn" onClick={closeChat}>X</button>
+                            <button className="leave-btn" onClick={closeChat}><RiCloseFill/></button>
                         </div>
                         <h1>{chatId}</h1>
                     </div>
@@ -93,7 +94,7 @@ const ChatModal = () => {
                                 placeholder="Write a message"
                             />
                             <button type="submit" disabled={!newMessage}>
-                                Send
+                                <RiSendPlaneFill/>
                             </button>
                         </form>
                     </div>
