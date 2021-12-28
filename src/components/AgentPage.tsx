@@ -68,10 +68,11 @@ const AgentPage = () => {
             <div className="container">
                 <div className="chat-list-left">
                     <h1>Chats</h1>
-                    <div>
+                    <div className="chats">
                         <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "bold ongoing"}><a>Ongoing</a></div>
                         <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "bold archived"}><a>Archived</a></div>
                     </div>
+                    <div>
                     <div hidden={showOngoing}>
                         <div className="list">
                             {ongoingChats.map(c => (
@@ -90,6 +91,8 @@ const AgentPage = () => {
                             ))}
                         </div>
                     </div>
+                    </div>
+                  
                 </div>
                 <div className="chat-box-right">
                     <div className="chat-box-agent" hidden={show}>

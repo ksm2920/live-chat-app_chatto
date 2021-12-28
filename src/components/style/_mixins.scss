@@ -34,7 +34,6 @@
 
 @mixin archive-btn {
     position: absolute;
-    top:15px;
     right:10px;
     padding: 5px;
     border: none;
@@ -52,6 +51,6 @@
         padding:20px;
     }
     a:hover {
-        background-color: lightgray;
+        background-color: #b8d1da;;
     }
 }

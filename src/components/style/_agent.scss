@@ -15,36 +15,38 @@
 	height:86vh;
 	float:left;
     padding-bottom: 20px;
-	background:rgb(192, 192, 192);
+	background:lightgray;
     overflow-y: auto;
     h1 {
         text-align: center;
         font-size: 25px;
-    }
-    h2 {
-        color: rgb(53, 53, 53);
+        padding: 10px;
     }
     div {
         font-size: 20px;
-        padding: 20px 0;
         cursor: pointer;
     }
-    .ongoing {
-        float: left;
-        @include border-top-radius;
-        @include aTag-hover;
-    }
 
-    .archived {
-        float: right;
-        @include border-top-radius;
-       @include aTag-hover;
+    .chats {
+        padding-bottom: 40px;
+        border-bottom: 2px solid rgb(185, 185, 185);
+        .ongoing {
+            float: left;
+            @include border-top-radius;
+            @include aTag-hover;
+        }
+    
+        .archived {
+            float: right;
+            @include border-top-radius;
+           @include aTag-hover;
+        }
     }
 }
 
 .selected {
     font-weight: bold;
-    background-color: lightgray;
+    background-color: #b8d1da;;
 }
 
 .bold {
@@ -60,7 +62,7 @@
     div {
         padding: 20px;
         &:hover {
-            background-color: lightgray;
+            background-color: #b8d1da;
         }
     }
 }
@@ -75,7 +77,8 @@
         position: relative;
         .chat-header {
             position: relative;
-            padding: 3%;
+            padding: 83px 10px 10px;
+            border-bottom: 2px solid rgb(185, 185, 185);
             h1 {
                 margin: 0;
                 font-size: 25px;
@@ -84,6 +87,7 @@
             }
             .leave-btn {
               @include archive-btn;
+              top: 80px;
             }
         }
         .chat-body {
