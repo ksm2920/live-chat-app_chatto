@@ -20,7 +20,6 @@
     h1 {
         text-align: center;
         font-size: 25px;
-        padding: 10px;
     }
     div {
         font-size: 20px;
@@ -28,24 +27,26 @@
     }
 
     .chats {
-        padding-bottom: 40px;
+        padding-bottom: 60px;
         border-bottom: 2px solid rgb(185, 185, 185);
         @include respond(medium) {
             display: flex;
             flex-direction: column;
-            padding-bottom: 20px;
+            padding-bottom: 0px;
         }
         .ongoing {
             float: left;
-            @include border-top-radius;
+            padding: 20px; 
+            // @include border-top-radius;
             @include hover;
             @include respond(medium) {
-                padding-bottom: 40px;
+                // margin-bottom: 40px;
             }
         }
         .archived {
             float: right;
-            @include border-top-radius;
+            padding: 20px; 
+            // @include border-top-radius;
             @include hover;
         }
     }
@@ -56,9 +57,9 @@
     background-color: #b8d1da;;
 }
 
-.bold {
-    font-weight: bold;
-}
+// .bold {
+//     font-weight: bold;
+// }
 
 .normal {
     font-weight: normal;

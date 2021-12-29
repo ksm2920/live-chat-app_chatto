@@ -50,10 +50,7 @@
 }
 
 @mixin hover {
-    a {
-        padding:20px;
-        &:hover {
+    &:hover {
             background-color: #b8d1da;
-        }
     }
 }
