@@ -1,8 +1,11 @@
-import { useRef, useState } from "react";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";import { useRef, useState } from "react";
 import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
+const auth = firebase.auth();
 
 const ChatModal = () => {
     const [show, setShow] = useState(true);
@@ -20,11 +23,13 @@ const ChatModal = () => {
     const createNewChat = () => {
         // let random = Math.floor(Math.random() * 100) + 1;
         const chatName = userName;
+        const firstMsg = userMsg;
         FireClient.db.collection("chats").doc(chatName).set({
             id: chatName,
             created: new Date(),
             archived: false
         })
+        FireClient.saveUserIfo(userEmail, firstMsg, chatName);
         setChatId(chatName);
         subscribeMessage(chatName);
     }
@@ -54,7 +59,7 @@ const ChatModal = () => {
 
     const handelOnSubmit = (e: any) => {
         e.preventDefault();
-        FireClient.postMessage(newMessage, chatId);
+        FireClient.postMessage(newMessage, chatId, auth.currentUser!);
         setNewMessage("");
     }
 

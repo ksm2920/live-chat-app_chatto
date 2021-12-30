@@ -5,4 +5,5 @@ export class Message {
     public chatId: string = "";
     public userPhoto?: string;
     public userName?: string;
+    public userEmail?: string;
 }
