@@ -32,6 +32,9 @@ const ChatModal = () => {
         FireClient.saveUserIfo(userEmail, firstMsg, chatName);
         setChatId(chatName);
         subscribeMessage(chatName);
+        setUserName("");
+        setUserEmail("");
+        setUserMsg("");
     }
 
     const subscribeMessage = (chatId: string) => {
@@ -65,9 +68,6 @@ const ChatModal = () => {
 
     const submitUserForm = (e: any) => {
         e.preventDefault();
-        setUserName("");
-        setUserEmail("");
-        setUserMsg("");
     }
 
     const closeChat = async () => {
