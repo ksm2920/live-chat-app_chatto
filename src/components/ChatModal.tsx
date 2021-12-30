@@ -6,23 +6,27 @@ import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 
 const ChatModal = () => {
     const [show, setShow] = useState(true);
+    const [showForm, setShowForm] = useState(true);
     const [showBtn, setShowBtn] = useState(false);
     const [showModal, setShowModal] = useState(showChatModal(window.location.pathname));
     const [chatId, setChatId] = useState("");
     const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
     const messagesEndRef = useRef<null | HTMLDivElement>(null)
+    const [userName, setUserName] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    const [userMsg, setUserMsg] = useState("");
 
     const createNewChat = () => {
-        let random = Math.floor(Math.random() * 100) + 1;
-        const chatNum = "Chat " + random;
-        FireClient.db.collection("chats").doc(chatNum).set({
-            id: chatNum,
+        // let random = Math.floor(Math.random() * 100) + 1;
+        const chatName = userName;
+        FireClient.db.collection("chats").doc(chatName).set({
+            id: chatName,
             created: new Date(),
             archived: false
         })
-        setChatId(chatNum);
-        subscribeMessage(chatNum);
+        setChatId(chatName);
+        subscribeMessage(chatName);
     }
 
     const subscribeMessage = (chatId: string) => {
@@ -32,14 +36,33 @@ const ChatModal = () => {
         })
     }
 
-    const handleOnChange = (e: any) => {
+    const handleOnChangeNewMsg = (e: any) => {
         setNewMessage(e.target.value);
+    }
+
+    const handleOnChangeUserName = (e: any) => {
+        setUserName(e.target.value);
+    }
+    
+    const handleOnChangeUserEmail = (e: any) => {
+        setUserEmail(e.target.value);
+    }
+    
+    const handleOnChangeUserMsg = (e: any) => {
+        setUserMsg(e.target.value);
     }
 
     const handelOnSubmit = (e: any) => {
         e.preventDefault();
         FireClient.postMessage(newMessage, chatId);
         setNewMessage("");
+    }
+
+    const submitUserForm = (e: any) => {
+        e.preventDefault();
+        setUserName("");
+        setUserEmail("");
+        setUserMsg("");
     }
 
     const closeChat = async () => {
@@ -62,43 +85,85 @@ const ChatModal = () => {
             <div className="chat-modal">
                 <div className="support-btn" hidden={showBtn}>
                     <button onClick={() => {
-                        createNewChat();
                         setShow(false);
+                        setShowForm(false);
                         setShowBtn(true);
                     }}>Support</button>
                 </div>
                 <div className="chat-box" hidden={show}>
                     <div className="chat-header">
-                        <div>
-                            <button className="leave-btn" onClick={closeChat}><RiCloseFill/></button>
-                        </div>
-                        <h1>{chatId}</h1>
+                        {showForm === false ?
+                            <div>
+                                <button className="leave-btn" onClick={() => { setShow(true); setShowBtn(false); }}><RiCloseFill /></button>
+                            </div>
+                            :
+                            <div>
+                                <button className="leave-btn" onClick={closeChat}><RiCloseFill /></button>
+                            </div>
+                        }
+                        {showForm === false ? <h1>Support</h1> : <h1>{chatId}</h1>}
                     </div>
                     <div className="chat-body">
-                        <ul>
-                            {messages.map(m => (
-                                <li key={m.id}>
-                                    <MessageItem message={m} />
-                                </li>
-                            ))}
-                        </ul>
-                        <div ref={messagesEndRef} />
-                    </div>
+                        {showForm === false ?
+                            <form onSubmit={submitUserForm} className="user-form">
+                                <label>Your name</label>
+                                <input
+                                    type="text"
+                                    value={userName}
+                                    onChange={handleOnChangeUserName}
+                                />
+                                <label>E-mail</label>
+                                <input
+                                    type="email"
+                                    value={userEmail}
+                                    onChange={handleOnChangeUserEmail}
+                                />
+                                <label>Message</label>
+                                <textarea
+                                    rows={5}
+                                    value={userMsg}
+                                    onChange={handleOnChangeUserMsg}
+                                />
+                                <button onClick={() => {
+                                    createNewChat();
+                                    setShowForm(true);
+                                    setShow(false)
+                                }}
+                                    type="button"
+                                    disabled={!userName || !userEmail || !userMsg}>
+                                    Send
+                                </button>
+                            </form>
+                            :
+                            <>
+                                <ul>
+                                    {messages.map(m => (
+                                        <li key={m.id}>
+                                            <MessageItem message={m} />
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div ref={messagesEndRef} />
+                            </>
+                        }
 
-                    <div className="message-input">
-                        <form onSubmit={handelOnSubmit}>
-                            <input
-                                type="text"
-                                value={newMessage}
-                                onChange={handleOnChange}
-                                placeholder="Write a message"
-                            />
-                            <button type="submit" disabled={!newMessage}>
-                                <RiSendPlaneFill/>
-                            </button>
-                        </form>
                     </div>
-
+                    {showForm === false ?
+                        <></>
+                        :
+                        <div className="message-input">
+                            <form onSubmit={handelOnSubmit}>
+                                <input
+                                    type="text"
+                                    value={newMessage}
+                                    onChange={handleOnChangeNewMsg}
+                                    placeholder="Write a message"
+                                />
+                                <button type="submit" disabled={!newMessage}>
+                                    <RiSendPlaneFill />
+                                </button>
+                            </form>
+                        </div>}
                 </div>
             </div>
         )
