@@ -115,8 +115,11 @@
             }
         }
         .chat-body {
-            max-height: 70vh;
-            @include message-box
+            max-height: 68vh;
+            @include message-box;
+            @include respond(medium) {
+                max-height: 74vh;
+            }
         }
         .message-input {
             @include message-input;
