@@ -5,6 +5,7 @@ import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
+import { BiSupport } from "react-icons/bi";
 const auth = firebase.auth();
 
 const ChatModal = () => {
@@ -93,7 +94,7 @@ const ChatModal = () => {
                         setShow(false);
                         setShowForm(false);
                         setShowBtn(true);
-                    }}>Support</button>
+                    }}><BiSupport/></button>
                 </div>
                 <div className="chat-box" hidden={show}>
                     <div className="chat-header">
