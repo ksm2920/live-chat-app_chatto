@@ -11,6 +11,8 @@ firebase.initializeApp({
     appId: "1:863091774335:web:cd2f7768de75c0f045004a"
 });
 
+firebase.firestore().settings({ experimentalForceLongPolling: true, merge: true });
+
 export class FireClient {
     static db = firebase.firestore();
 
