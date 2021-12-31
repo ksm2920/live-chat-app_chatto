@@ -6,6 +6,7 @@ import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { BiSupport } from "react-icons/bi";
+import { format } from "date-fns";
 const auth = firebase.auth();
 
 const ChatModal = () => {

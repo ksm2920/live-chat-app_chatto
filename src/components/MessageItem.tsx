@@ -1,3 +1,4 @@
+import { formatRelative, subDays } from "date-fns";
 import { FunctionComponent, useState } from "react";
 import { Message } from "../models/Message";
 
@@ -16,7 +17,7 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
             <p>{message.text}</p>
             {message.createdAt ? (
                 <span>
-                    {message.createdAt}
+                    {formatRelative(subDays(new Date(message.createdAt), 0), new Date())}
                 </span>
             ) : null}
         </div>
