@@ -31,7 +31,8 @@
 
     .chats {
         padding-bottom: 60px;
-        border-bottom: 2px solid rgb(185, 185, 185);
+        // box-shadow:  0 10px 10px -10px #bdbdbd;
+        border-bottom: 1px solid rgb(223, 223, 223);
         @include respond(medium) {
             display: flex;
             flex-direction: column;
@@ -99,7 +100,8 @@
             @include respond(medium) {
                 padding-top: 20px;
             }
-            border-bottom: 2px solid rgb(185, 185, 185);
+            // box-shadow:  0 10px 10px -10px #bdbdbd;
+            border-bottom: 1px solid rgb(223, 223, 223);
             h1 {
                 margin: 0;
                 font-size: 25px;
