@@ -33,6 +33,21 @@
     .chat-body {
         max-height: 380px;
        @include message-box;
+       .agent {
+        text-align: left;
+        @include msg-box;
+            p {
+                 margin-right: 20%;
+            }
+        }
+        .guest {
+        text-align: right;
+        @include msg-box;
+            p { 
+                background-color: lightblue;
+                margin-left: 20%;
+             }
+        }
     }
     .message-input {
         @include message-input;

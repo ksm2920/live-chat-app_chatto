@@ -122,6 +122,22 @@
             @include respond(medium) {
                 max-height: 74vh;
             }
+            .agent {
+                text-align: right;
+                @include msg-box;
+                p {
+                    background-color: lightblue;
+                    margin-left: 20%;
+                }
+            }
+            
+            .guest {
+                text-align: left;
+                @include msg-box;
+                p {
+                    margin-right: 20%;
+                }
+            }
         }
         .message-input {
             @include message-input;
@@ -145,7 +161,7 @@
 	clear:both;    
 }
 
-.footer{
-	height:80px;
-	background:#ccc;
-}
+// .footer{
+// 	height:80px;
+// 	background:#ccc;
+// }

@@ -1,5 +1,5 @@
 import { formatRelative, subDays } from "date-fns";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Message } from "../models/Message";
 
 
@@ -7,9 +7,17 @@ type MessageProps = {
     message: Message
 }
 const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
+    const [messageFrom, setMessageFrom] = useState("");
+    useEffect(() => {
+        if(message.userName === "Agent") {
+            setMessageFrom("agent");
+        } else {
+            setMessageFrom("guest");
+        }
+    })
 
     return (
-        <div>
+        <div className={`${messageFrom}`}>
             {message.userPhoto ? (
                 <img src={message.userPhoto} alt="Avatar" width={45} height={45} />
             ) : null}
