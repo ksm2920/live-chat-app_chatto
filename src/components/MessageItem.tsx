@@ -17,7 +17,7 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
             <p>{message.text}</p>
             {message.createdAt ? (
                 <span>
-                    {formatRelative(subDays(new Date(message.createdAt), 0), new Date())}
+                    {formatRelative(new Date(message.createdAt), new Date())}
                 </span>
             ) : null}
         </div>
