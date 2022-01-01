@@ -25,7 +25,7 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
             <p>{message.text}</p>
             {message.createdAt ? (
                 <div>
-                    {format(new Date(message.createdAt), "MM/dd/yyyy HH:mm")}
+                    {format(new Date(message.createdAt), "MM/dd/yyyy 'at' HH:mm")}
                 </div>
             ) : null}
         </div>
