@@ -1,8 +1,8 @@
-@import 'layout', 'agent', 'mixins', 'modal';
+@import "layout", "agent", "mixins", "modal";
 
 body {
     font-family: sans-serif;
-    margin:0;
+    margin: 0;
     padding: 0;
 }
 
@@ -26,11 +26,9 @@ li {
         border-radius: 50%;
         border: none;
         box-shadow: 1px 1px 5px #bdbdbd;
-        background-color: #5298B0;
+        background-color: #5298b0;
         height: 70px;
         width: 70px;
         cursor: pointer;
     }
-
 }
-

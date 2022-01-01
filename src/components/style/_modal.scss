@@ -1,4 +1,4 @@
-@import 'mixins';
+@import "mixins";
 
 .chat-modal {
     margin-top: 30vh;
@@ -15,7 +15,7 @@
     position: relative;
     .chat-header {
         position: relative;
-        background-color: #5298B0;
+        background-color: #5298b0;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         padding: 5%;
@@ -26,27 +26,27 @@
         }
         .leave-btn {
             @include archive-btn;
-            background-color: #5298B0;
-            color:white;
+            background-color: #5298b0;
+            color: white;
         }
     }
     .chat-body {
         max-height: 380px;
-       @include message-box;
-       .agent {
-        text-align: left;
-        @include msg-box;
+        @include message-box;
+        .agent {
+            text-align: left;
+            @include msg-box;
             p {
-                 margin-right: 20%;
+                margin-right: 20%;
             }
         }
         .guest {
-        text-align: right;
-        @include msg-box;
-            p { 
+            text-align: right;
+            @include msg-box;
+            p {
                 background-color: lightblue;
                 margin-left: 20%;
-             }
+            }
         }
     }
     .message-input {
@@ -69,7 +69,8 @@
         padding: 20px;
         padding-bottom: 5px;
     }
-    input, textarea {
+    input,
+    textarea {
         margin: 0 15px 5px;
         padding: 10px;
         width: 80%;

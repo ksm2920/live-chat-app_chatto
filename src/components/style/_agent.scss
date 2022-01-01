@@ -1,23 +1,23 @@
-@import 'mixins';
+@import "mixins";
 
-.wrap{
-	width:100vw;             
-	margin:auto;
+.wrap {
+    width: 100vw;
+    margin: auto;
 }
 
-.header{
-	height:10vh;
-	background:#5298B0;
+.header {
+    height: 10vh;
+    background: #5298b0;
 }
 
-.chat-list-left{
-	width:27vw;
-	height:90vh;
-	float:left;
-    overflow-y: auto;  
+.chat-list-left {
+    width: 27vw;
+    height: 90vh;
+    float: left;
+    overflow-y: auto;
     box-shadow: 1px 1px 5px #bdbdbd;
     @include respond(medium) {
-        width:30vw;
+        width: 30vw;
     }
     h1 {
         text-align: center;
@@ -27,10 +27,8 @@
         font-size: 20px;
         cursor: pointer;
     }
-
     .chats {
         padding-bottom: 60px;
-        // box-shadow:  0 10px 10px -10px #bdbdbd;
         border-bottom: 1px solid rgb(223, 223, 223);
         @include respond(medium) {
             display: flex;
@@ -39,17 +37,12 @@
         }
         .ongoing {
             float: left;
-            padding: 20px; 
-            // @include border-top-radius;
+            padding: 19px;
             @include hover;
-            @include respond(medium) {
-                // margin-bottom: 40px;
-            }
         }
         .archived {
             float: right;
-            padding: 20px; 
-            // @include border-top-radius;
+            padding: 19px;
             @include hover;
         }
     }
@@ -57,12 +50,8 @@
 
 .selected {
     font-weight: bold;
-    background-color: #b8d1da;;
+    background-color: #b8d1da;
 }
-
-// .bold {
-//     font-weight: bold;
-// }
 
 .normal {
     font-weight: normal;
@@ -70,7 +59,7 @@
 
 .list {
     border-radius: 5px;
-    div {
+    .chat-item {
         padding: 20px;
         &:hover {
             background-color: #b8d1da;
@@ -78,10 +67,10 @@
     }
 }
 
-.chat-box-right{
+.chat-box-right {
     padding-left: 10px;
-	width:70vw;
-	float:left;
+    width: 70vw;
+    float: left;
     @include respond(medium) {
         width: 68vw;
     }
@@ -99,7 +88,6 @@
             @include respond(medium) {
                 padding-top: 20px;
             }
-            // box-shadow:  0 10px 10px -10px #bdbdbd;
             border-bottom: 1px solid rgb(223, 223, 223);
             h1 {
                 margin: 0;
@@ -108,11 +96,11 @@
                 margin-left: 15px;
             }
             .leave-btn {
-              @include archive-btn;
-              top: 80px;
-              @include respond(medium) {
-                top: 20px;
-            }
+                @include archive-btn;
+                top: 80px;
+                @include respond(medium) {
+                    top: 20px;
+                }
             }
         }
         .chat-body {
@@ -129,7 +117,6 @@
                     margin-left: 20%;
                 }
             }
-            
             .guest {
                 text-align: left;
                 @include msg-box;
@@ -153,14 +140,10 @@
                 }
             }
         }
-
     }
 }
-.clear{
-	clear:both;    
+
+.clear {
+    clear: both;
 }
 
-// .footer{
-// 	height:80px;
-// 	background:#ccc;
-// }

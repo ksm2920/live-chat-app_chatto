@@ -5,6 +5,7 @@ import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
+import ChatItem from "./ChatItem";
 import MessageItem from "./MessageItem";
 
 const auth = firebase.auth();
@@ -23,7 +24,7 @@ const AgentPage = () => {
 
     useEffect(() => {
         auth.onAuthStateChanged(agent => {
-            if(agent) {
+            if (agent) {
                 setAgent(agent);
             } else {
                 setAgent(null);
@@ -42,7 +43,7 @@ const AgentPage = () => {
         auth.useDeviceLanguage();
         try {
             await auth.signInWithRedirect(provider);
-        }catch (error) {
+        } catch (error) {
             console.log(error)
         }
     }
@@ -94,81 +95,81 @@ const AgentPage = () => {
     }
 
     return <>
-    {agent? (
-        <div className="wrap">
-        <div className="header"> <button onClick={signOut}>Sign out</button></div>
-        <div className="container">
-            <div className="chat-list-left">
-                <h1>Chats</h1>
-                <div className="chats">
-                    <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>Ongoing</div>
-                    <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "selected archived"}>Archived</div>
-                </div>
-                <div>
-                    <div hidden={showOngoing}>
-                        <div className="list">
-                            {ongoingChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
-                                    {c.id}
-                                </div>
-                            ))}
+        {agent ? (
+            <div className="wrap">
+                <div className="header"> <button onClick={signOut}>Sign out</button></div>
+                <div className="container">
+                    <div className="chat-list-left">
+                        <h1>Chats</h1>
+                        <div className="chats">
+                            <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>Ongoing</div>
+                            <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "selected archived"}>Archived</div>
                         </div>
-                    </div>
-                    <div hidden={showArchived}>
-                        <div className="list">
-                            {archivedChats.map(c => (
-                                <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
-                                    {c.id}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div className="chat-box-right">
-                <div className="chat-box-agent" hidden={show}>
-                    <div className="chat-header">
                         <div>
-                            <button className="leave-btn" onClick={archiveChat}><RiCloseFill/></button>
+                            <div hidden={showOngoing}>
+                                <div className="list">
+                                    {ongoingChats.map(c => (
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
+                                            <ChatItem chat={c}/>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div hidden={showArchived}>
+                                <div className="list">
+                                    {archivedChats.map(c => (
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
+                                           <ChatItem chat={c}/>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-                        <h1>{chatId}</h1>
-                    </div>
-                    <div className="chat-body">
-                        <ul>
-                            {messages.map(m => (
-                                <li key={m.id}>
-                                    <MessageItem message={m} />
-                                </li>
-                            ))}
-                        </ul>
-                        <div ref={messagesEndRef} />
-                    </div>
-                    <div className="message-input">
-                        <form onSubmit={handelOnSubmit}>
-                            <input
-                                type="text"
-                                value={newMessage}
-                                onChange={handleOnChange}
-                                placeholder="Write a message"
-                            />
-                            <button type="submit" disabled={!newMessage}>
-                                <RiSendPlaneFill />
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div className="clear"></div>
 
-        </div>
-        {/* <div className="footer"></div> */}
-    </div>
-    ) : (
-        <button onClick={signInWithGoogle}>Sign with Google</button> 
-    )
-    }
-      
+                    </div>
+                    <div className="chat-box-right">
+                        <div className="chat-box-agent" hidden={show}>
+                            <div className="chat-header">
+                                <div>
+                                    <button className="leave-btn" onClick={archiveChat}><RiCloseFill /></button>
+                                </div>
+                                <h1>{chatId}</h1>
+                            </div>
+                            <div className="chat-body">
+                                <ul>
+                                    {messages.map(m => (
+                                        <li key={m.id}>
+                                            <MessageItem message={m} />
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div ref={messagesEndRef} />
+                            </div>
+                            <div className="message-input">
+                                <form onSubmit={handelOnSubmit}>
+                                    <input
+                                        type="text"
+                                        value={newMessage}
+                                        onChange={handleOnChange}
+                                        placeholder="Write a message"
+                                    />
+                                    <button type="submit" disabled={!newMessage}>
+                                        <RiSendPlaneFill />
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="clear"></div>
+
+                </div>
+                {/* <div className="footer"></div> */}
+            </div>
+        ) : (
+            <button onClick={signInWithGoogle}>Sign with Google</button>
+        )
+        }
+
 
 
     </>

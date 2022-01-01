@@ -1,12 +1,12 @@
 
 import firebase from "firebase/compat/app";
-import "firebase/compat/auth";import { useRef, useState } from "react";
+import "firebase/compat/auth";
+import { useRef, useState } from "react";
+import { BiSupport } from "react-icons/bi";
+import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
-import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
-import { BiSupport } from "react-icons/bi";
-import { format } from "date-fns";
 const auth = firebase.auth();
 
 const ChatModal = () => {
@@ -23,7 +23,6 @@ const ChatModal = () => {
     const [userMsg, setUserMsg] = useState("");
 
     const createNewChat = () => {
-        // let random = Math.floor(Math.random() * 100) + 1;
         const chatName = userName;
         const firstMsg = userMsg;
         FireClient.db.collection("chats").doc(chatName).set({
@@ -53,11 +52,11 @@ const ChatModal = () => {
     const handleOnChangeUserName = (e: any) => {
         setUserName(e.target.value);
     }
-    
+
     const handleOnChangeUserEmail = (e: any) => {
         setUserEmail(e.target.value);
     }
-    
+
     const handleOnChangeUserMsg = (e: any) => {
         setUserMsg(e.target.value);
     }
@@ -95,7 +94,7 @@ const ChatModal = () => {
                         setShow(false);
                         setShowForm(false);
                         setShowBtn(true);
-                    }}><BiSupport/></button>
+                    }}><BiSupport /></button>
                 </div>
                 <div className="chat-box" hidden={show}>
                     <div className="chat-header">

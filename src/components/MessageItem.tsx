@@ -1,4 +1,4 @@
-import { format, formatRelative, subDays } from "date-fns";
+import { format } from "date-fns";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Message } from "../models/Message";
 
@@ -9,7 +9,7 @@ type MessageProps = {
 const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
     const [messageFrom, setMessageFrom] = useState("");
     useEffect(() => {
-        if(message.userName === "Agent") {
+        if (message.userName === "Agent") {
             setMessageFrom("agent");
         } else {
             setMessageFrom("guest");
