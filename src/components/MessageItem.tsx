@@ -21,7 +21,7 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
             {message.userPhoto ? (
                 <img src={message.userPhoto} alt="Avatar" width={45} height={45} />
             ) : null}
-            {message.userName ? <div>{message.userName}</div> : null}
+            {/* {message.userName ? <div>{message.userName}</div> : null} */}
             <p>{message.text}</p>
             {message.createdAt ? (
                 <div>

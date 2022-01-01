@@ -14,7 +14,6 @@
 	width:27vw;
 	height:90vh;
 	float:left;
-    padding: 0 10px;
     overflow-y: auto;  
     box-shadow: 1px 1px 5px #bdbdbd;
     @include respond(medium) {
@@ -80,14 +79,14 @@
 }
 
 .chat-box-right{
-    padding-left: 7px;
-	width:67vw;
+    padding-left: 10px;
+	width:70vw;
 	float:left;
     @include respond(medium) {
-        width: 65vw;
+        width: 68vw;
     }
     @include respond(small) {
-        width: 60vw;
+        width: 65vw;
     }
     .chat-box-agent {
         text-align: center;
