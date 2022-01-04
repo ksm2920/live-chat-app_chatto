@@ -205,19 +205,9 @@ const AgentPage = () => {
                     <div className="container">
                         <div className="login-form">
                             <h1 className="chatto">Chatto</h1>
-                            {/* <div className="form">
-                                <input type="text" placeholder="email" value={email} onChange={onChangeEmail}/>
-                                <input type="text" placeholder="password" value={password} onChange={onChangePassword}/>
-                                <button onClick={() => { signInWithEmail(email, password)}} className="email"><span><MdEmail /></span>Sign in with email</button>
-                            </div>
-                            <div className="inline"><span className="line-left"></span><span className="or">OR</span><span className="line-right"></span></div>
-                            <div>
-                                <button onClick={signInWithGoogle} className="google"><span><FcGoogle /></span>Sign in with Google</button>
-                            </div> */}
                             <FirebaseUIAuth version="4.7.3"/>
                         </div>
                     </div>
-                    {/* <div className="footer"></div> */}
                 </div>
             </>
         )
