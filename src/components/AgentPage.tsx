@@ -204,7 +204,7 @@ const AgentPage = () => {
                     </div>
                     <div className="container">
                         <div className="login-form">
-                            <h1>Chatto</h1>
+                            <h1 className="chatto">Chatto</h1>
                             {/* <div className="form">
                                 <input type="text" placeholder="email" value={email} onChange={onChangeEmail}/>
                                 <input type="text" placeholder="password" value={password} onChange={onChangePassword}/>
