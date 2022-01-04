@@ -40,6 +40,14 @@ li {
         h1 {
             font-size: 50px;
         }
+        .form {
+            input {
+                width: 90%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+        }
         text-align: center;
         padding: 40px 20px;
         border: 1px solid lightgray;
