@@ -18,8 +18,8 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
 
     return (
         <div className={`${messageFrom}`}>
-            {message.userPhoto ? (
-                <img src={message.userPhoto} alt="Avatar" width={45} height={45} />
+            {message.userName === "Agent" ? (
+                <div className="user-photo">A</div>
             ) : null}
             {/* {message.userName ? <div>{message.userName}</div> : null} */}
             <p>{message.text}</p>

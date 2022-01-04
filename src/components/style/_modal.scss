@@ -39,6 +39,10 @@
             p {
                 margin-right: 20%;
             }
+            .user-photo {
+                float: left;
+                @include agent-profile;
+              }
         }
         .guest {
             text-align: right;

@@ -39,16 +39,6 @@ const AgentPage = () => {
         })
     }, [chatId])
 
-    const signInWithGoogle = async () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        auth.useDeviceLanguage();
-        try {
-            await auth.signInWithRedirect(provider);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     const signOut = async () => {
         try {
             await firebase.auth().signOut();

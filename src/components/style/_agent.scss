@@ -142,6 +142,10 @@
                     background-color: lightblue;
                     margin-left: 20%;
                 }
+                .user-photo {
+                    @include agent-profile;
+                    float: right;
+                }
             }
             .guest {
                 text-align: left;
@@ -150,6 +154,7 @@
                     margin-right: 20%;
                 }
             }
+
         }
         .message-input {
             @include message-input;

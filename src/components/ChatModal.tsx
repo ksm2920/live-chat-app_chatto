@@ -147,8 +147,8 @@ const ChatModal = () => {
                                             <MessageItem message={m} />
                                         </li>
                                     ))}
+                                     <div ref={messagesEndRef} />
                                 </ul>
-                                <div ref={messagesEndRef} />
                             </>
                         }
 

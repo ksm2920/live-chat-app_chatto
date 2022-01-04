@@ -62,3 +62,15 @@
         margin: 0 20px;
     }
 }
+
+@mixin agent-profile {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;  
+    height: 45px;
+    width: 45px;
+    margin: 2px 2px;
+    text-align: center;
+    font-size: 38px;
+}
