@@ -97,7 +97,12 @@ const AgentPage = () => {
     return <>
         {agent ? (
             <div className="wrap">
-                <div className="header"> <button onClick={signOut}>Sign out</button></div>
+                <div className="header">
+                    <div className="avatar">
+                        <img src={"https://cdn.icon-icons.com/icons2/2449/PNG/512/headphones_head_set_chat_live_support_icon_148822.png"} alt="Avatar" width={45} height={45} />
+                    </div>
+                    <button onClick={signOut}>SIGN OUT</button>
+                </div>
                 <div className="container">
                     <div className="chat-list-left">
                         <h1>Chats</h1>
@@ -110,7 +115,7 @@ const AgentPage = () => {
                                 <div className="list">
                                     {ongoingChats.map(c => (
                                         <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
-                                            <ChatItem chat={c}/>
+                                            <ChatItem chat={c} />
                                         </div>
                                     ))}
                                 </div>
@@ -119,7 +124,7 @@ const AgentPage = () => {
                                 <div className="list">
                                     {archivedChats.map(c => (
                                         <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
-                                           <ChatItem chat={c}/>
+                                            <ChatItem chat={c} />
                                         </div>
                                     ))}
                                 </div>
@@ -166,7 +171,16 @@ const AgentPage = () => {
                 {/* <div className="footer"></div> */}
             </div>
         ) : (
-            <button onClick={signInWithGoogle}>Sign with Google</button>
+            <>
+                <div className="wrap">
+                    <div className="header">
+                    </div>
+                    <div className="container">
+                        <button onClick={signInWithGoogle}>Sign with Google</button>
+                    </div>
+                    {/* <div className="footer"></div> */}
+                </div>
+            </>
         )
         }
 
