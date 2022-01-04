@@ -9,6 +9,7 @@ import ChatItem from "./ChatItem";
 import MessageItem from "./MessageItem";
 import { FcGoogle } from "react-icons/fc";
 import { MdEmail } from "react-icons/md";
+import FirebaseUIAuth from "./FirebaseAuthLocalized";
 
 const auth = firebase.auth();
 
@@ -204,7 +205,7 @@ const AgentPage = () => {
                     <div className="container">
                         <div className="login-form">
                             <h1>Chatto</h1>
-                            <div className="form">
+                            {/* <div className="form">
                                 <input type="text" placeholder="email" value={email} onChange={onChangeEmail}/>
                                 <input type="text" placeholder="password" value={password} onChange={onChangePassword}/>
                                 <button onClick={() => { signInWithEmail(email, password)}} className="email"><span><MdEmail /></span>Sign in with email</button>
@@ -212,7 +213,8 @@ const AgentPage = () => {
                             <div className="inline"><span className="line-left"></span><span className="or">OR</span><span className="line-right"></span></div>
                             <div>
                                 <button onClick={signInWithGoogle} className="google"><span><FcGoogle /></span>Sign in with Google</button>
-                            </div>
+                            </div> */}
+                            <FirebaseUIAuth version="4.7.3"/>
                         </div>
                     </div>
                     {/* <div className="footer"></div> */}
