@@ -6,10 +6,8 @@ import { FireClient } from "../FireClient";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
 import ChatItem from "./ChatItem";
-import MessageItem from "./MessageItem";
-import { FcGoogle } from "react-icons/fc";
-import { MdEmail } from "react-icons/md";
 import FirebaseUIAuth from "./FirebaseAuthLocalized";
+import MessageItem from "./MessageItem";
 
 const auth = firebase.auth();
 
@@ -17,7 +15,6 @@ const AgentPage = () => {
     const [show, setShow] = useState(true);
     const [showOngoing, setShowOngoing] = useState(false);
     const [showArchived, setShowArchived] = useState(true);
-    const [showLoginForm, setShowLoginForm] = useState(true);
     const [chatId, setChatId] = useState("");
     const [ongoingChats, setOngoingChats] = useState<Chat[]>([]);
     const [archivedChats, setArchivedChats] = useState<Chat[]>([]);
@@ -25,8 +22,6 @@ const AgentPage = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [agent, setAgent] = useState(() => auth.currentUser);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     useEffect(() => {
         auth.onAuthStateChanged(agent => {
@@ -49,19 +44,6 @@ const AgentPage = () => {
         auth.useDeviceLanguage();
         try {
             await auth.signInWithRedirect(provider);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const signInWithEmail = async (email: string, password: string) => {
-        const cred = firebase.auth.EmailAuthProvider.credential(
-            email,
-            password
-        );
-        auth.useDeviceLanguage();
-        try {
-            await auth.signInWithRedirect(cred);
         } catch (error) {
             console.log(error)
         }
@@ -90,14 +72,6 @@ const AgentPage = () => {
 
     const handleOnChange = (e: any) => {
         setNewMessage(e.target.value);
-    }
-
-    const onChangeEmail = (e: any) => {
-        setEmail(e.target.value);
-    }
-
-    const onChangePassword = (e: any) => {
-        setPassword(e.target.value);
     }
 
     const archiveChat = async () => {

@@ -1,4 +1,5 @@
 @import "layout", "agent", "mixins", "modal";
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two:ital@0;1&display=swap');
 
 body {
     font-family: sans-serif;
@@ -38,7 +39,8 @@ li {
     position: relative;
     .login-form {
         .chatto {
-            font-size: 50px;
+            font-size: 60px;
+            font-family: "Lobster Two", cursive;
         }
         width: 30vw;
         text-align: center;
