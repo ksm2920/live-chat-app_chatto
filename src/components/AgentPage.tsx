@@ -7,6 +7,8 @@ import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
 import ChatItem from "./ChatItem";
 import MessageItem from "./MessageItem";
+import { FcGoogle } from "react-icons/fc";
+import { MdEmail } from "react-icons/md";
 
 const auth = firebase.auth();
 
@@ -176,7 +178,16 @@ const AgentPage = () => {
                     <div className="header">
                     </div>
                     <div className="container">
-                        <button onClick={signInWithGoogle}>Sign with Google</button>
+                        <div className="login-form">
+                            <h1>Chatto</h1>
+                            <div>
+                                <button onClick={signInWithGoogle} className="google"><span><FcGoogle/></span>Sign in with Google</button>
+                            </div>
+                            <div className="inline"><span className="line-left"></span><span className="or">OR</span><span className="line-right"></span></div>
+                            <div>
+                                <button onClick={signInWithGoogle} className="email"><span><MdEmail/></span>Sign in with email</button>
+                            </div>
+                        </div>
                     </div>
                     {/* <div className="footer"></div> */}
                 </div>

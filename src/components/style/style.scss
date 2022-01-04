@@ -32,3 +32,56 @@ li {
         cursor: pointer;
     }
 }
+
+.container {
+    height: 90vh;
+    position: relative;
+    .login-form {
+        h1 {
+            font-size: 50px;
+        }
+        text-align: center;
+        padding: 40px 20px;
+        border: 1px solid lightgray;
+        box-shadow: 1px 1px 5px #bdbdbd;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        button {
+            width: 300px;
+            height: 40px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 1px 1px 5px #bdbdbd;
+            span {
+                font-size: 20px;
+                padding-right:5px;
+            }
+        }
+        .google {
+            background-color: white;
+            cursor: pointer;
+        }
+        .email {
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
+        .inline span{
+            display: inline-block;
+        }
+        .line-left {
+            width: 100px;
+            border-bottom: 2px solid lightgray;
+        }
+        .or {
+            padding: 10px 20px;
+            color: gray;
+        }
+        .line-right {
+            width: 100px;
+            border-bottom: 2px solid lightgray;
+        }
+    }
+}
