@@ -26,10 +26,11 @@ const ChatModal = () => {
         const firstMsg = userFirstMsg;
         FireClient.db.collection("chats").doc(chatName).set({
             id: chatName,
+            email: userEmail,
             created: new Date(),
             archived: false
         })
-        FireClient.saveUserIfo(userEmail, firstMsg, chatName);
+        FireClient.saveUserIfo(firstMsg, chatName);
         setChatId(chatName);
         subscribeMessage(chatName);
         setUserName("");

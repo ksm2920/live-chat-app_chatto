@@ -16,12 +16,11 @@ firebase.firestore().settings({ experimentalForceLongPolling: true, merge: true 
 export class FireClient {
     static db = firebase.firestore();
 
-    static async saveUserIfo(userEmail: string, firstmsg: string, chatId: string) {
+    static async saveUserIfo(firstmsg: string, chatId: string) {
         if(!FireClient.db)
         return;
 
         let message = new Message();
-        message.userEmail = userEmail;
         message.text = firstmsg;
         
         await FireClient.db.collection("chats").doc(chatId)
