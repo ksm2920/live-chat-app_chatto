@@ -18,10 +18,10 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
 
     return (
         <div className={`${messageFrom}`}>
-            {message.userName === "Agent" ? (
+            {/* {message.userName === "Agent" ? (
                 <div className="user-photo">A</div>
-            ) : null}
-            {/* {message.userName ? <div>{message.userName}</div> : null} */}
+            ) : null} */}
+            {message.userName ? <div>{message.userName}</div> : null}
             <p>{message.text}</p>
             {message.createdAt ? (
                 <div>
