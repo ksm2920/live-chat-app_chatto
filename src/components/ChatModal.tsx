@@ -19,11 +19,11 @@ const ChatModal = () => {
     const messagesEndRef = useRef<null | HTMLDivElement>(null)
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
-    const [userMsg, setUserMsg] = useState("");
+    const [userFirstMsg, setUserFirstMsg] = useState("");
 
     const createNewChat = () => {
         const chatName = userName;
-        const firstMsg = userMsg;
+        const firstMsg = userFirstMsg;
         FireClient.db.collection("chats").doc(chatName).set({
             id: chatName,
             created: new Date(),
@@ -34,7 +34,7 @@ const ChatModal = () => {
         subscribeMessage(chatName);
         setUserName("");
         setUserEmail("");
-        setUserMsg("");
+        setUserFirstMsg("");
     }
 
     const subscribeMessage = (chatId: string) => {
@@ -56,8 +56,8 @@ const ChatModal = () => {
         setUserEmail(e.target.value);
     }
 
-    const handleOnChangeUserMsg = (e: any) => {
-        setUserMsg(e.target.value);
+    const handleOnChangeUserFirstMsg = (e: any) => {
+        setUserFirstMsg(e.target.value);
     }
 
     const handelOnSubmit = (e: any) => {
@@ -126,8 +126,8 @@ const ChatModal = () => {
                                 <label>Message</label>
                                 <textarea
                                     rows={5}
-                                    value={userMsg}
-                                    onChange={handleOnChangeUserMsg}
+                                    value={userFirstMsg}
+                                    onChange={handleOnChangeUserFirstMsg}
                                 />
                                 <button onClick={() => {
                                     createNewChat();
@@ -135,7 +135,7 @@ const ChatModal = () => {
                                     setShow(false)
                                 }}
                                     type="button"
-                                    disabled={!userName || !userEmail || !userMsg}>
+                                    disabled={!userName || !userEmail || !userFirstMsg}>
                                     Send
                                 </button>
                             </form>
