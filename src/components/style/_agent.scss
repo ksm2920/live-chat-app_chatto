@@ -9,21 +9,27 @@
     height: 10vh;
     background: #5298b0;
     position: relative;
-    .avatar {
+    .agent-profile {
         position: absolute;
         top: 15%;
         left: 2%;
-        background-color: white;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        @include respond(small) {
-            top: 10%;
-        }
-        img {
-            padding: 6px;
-        }
+        @include agent-profile;
     }
+    // .avatar {
+    //     position: absolute;
+    //     top: 15%;
+    //     left: 2%;
+    //     background-color: white;
+    //     border-radius: 50%;
+    //     width: 60px;
+    //     height: 60px;
+    //     @include respond(small) {
+    //         top: 10%;
+    //     }
+    //     img {
+    //         padding: 6px;
+    //     }
+    // }
     button {
         position: absolute;
         right: 2%;
@@ -154,7 +160,6 @@
                     margin-right: 20%;
                 }
             }
-
         }
         .message-input {
             @include message-input;
@@ -177,4 +182,3 @@
 .clear {
     clear: both;
 }
-

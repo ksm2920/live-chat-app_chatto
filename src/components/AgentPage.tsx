@@ -89,9 +89,7 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <div className="avatar">
-                        <img src={"https://cdn.icon-icons.com/icons2/2449/PNG/512/headphones_head_set_chat_live_support_icon_148822.png"} alt="Avatar" width={45} height={45} />
-                    </div>
+                    <div className="agent-profile">A</div>
                     <button onClick={signOut}>SIGN OUT</button>
                 </div>
                 <div className="container">
@@ -169,7 +167,7 @@ const AgentPage = () => {
                     <div className="container">
                         <div className="login-form">
                             <h1 className="chatto">Chatto</h1>
-                            <FirebaseUIAuth version="4.7.3"/>
+                            <FirebaseUIAuth version="4.7.3" />
                         </div>
                     </div>
                 </div>
