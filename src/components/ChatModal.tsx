@@ -22,17 +22,18 @@ const ChatModal = () => {
     const [userFirstMsg, setUserFirstMsg] = useState("");
 
     const createNewChat = () => {
-        const chatName = userName;
-        const firstMsg = userFirstMsg;
-        FireClient.db.collection("chats").doc(chatName).set({
-            id: chatName,
+        const random = Math.floor(Math.random() * 100) + 1
+        const id = "Chat" + random + " - " + userName;
+        FireClient.db.collection("chats").doc(id).set({
+            id: id,
+            username: userName,
             email: userEmail,
             created: new Date(),
             archived: false
         })
-        FireClient.saveUserIfo(firstMsg, chatName);
-        setChatId(chatName);
-        subscribeMessage(chatName);
+        FireClient.saveUserIfo(userFirstMsg, id);
+        setChatId(id);
+        subscribeMessage(id);
         setUserName("");
         setUserEmail("");
         setUserFirstMsg("");
@@ -107,7 +108,7 @@ const ChatModal = () => {
                                 <button className="leave-btn" onClick={closeChat}><RiCloseFill /></button>
                             </div>
                         }
-                        {showForm === false ? <h1>Support</h1> : <h1>{chatId}</h1>}
+                        {showForm === false ? <h1>Support</h1> : <h1>Chat with us!</h1>}
                     </div>
                     <div className="chat-body">
                         {showForm === false ?
@@ -148,7 +149,7 @@ const ChatModal = () => {
                                             <MessageItem message={m} />
                                         </li>
                                     ))}
-                                     <div ref={messagesEndRef} />
+                                    <div ref={messagesEndRef} />
                                 </ul>
                             </>
                         }

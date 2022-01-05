@@ -37,7 +37,7 @@ export class FireClient {
         if(user) {
             message.userName = "Agent";
         } else {
-            message.userName = chatId;
+            message.userName = "";
         }
 
         await FireClient.db.collection("chats").doc(chatId)
