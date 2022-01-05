@@ -24,10 +24,10 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
             {/* {message.userName === "Agent" ? (
                 <div className="user-photo">A</div>
             ) : null} */}
-            {message.userName ? <div>{message.userName}</div> : null}
+            {message.userName ? <div><b>{message.userName}</b></div> : null}
             <p>{message.text}</p>
             <div>
-                {format(new Date(message.createdAt), "MM/dd/yy, HH:MM")}
+                {format(new Date(message.createdAt), "MM/dd/yy, HH:mm:ss")}
             </div>
         </div>
     )
