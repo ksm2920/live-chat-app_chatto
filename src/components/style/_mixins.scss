@@ -3,6 +3,8 @@
 @mixin message-box {
     overflow-y: auto;
     text-align: left;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
 }
 
 @mixin message-input {
@@ -70,7 +72,7 @@
     border-radius: 50%;  
     height: 45px;
     width: 45px;
-    margin: 2px 2px;
+    margin: 2px 5px;
     text-align: center;
     font-size: 38px;
 }
