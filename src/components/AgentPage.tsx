@@ -22,6 +22,7 @@ const AgentPage = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [agent, setAgent] = useState(() => auth.currentUser);
+    const [isActive, setActive] = useState(false);
 
     useEffect(() => {
         auth.onAuthStateChanged(agent => {
@@ -85,15 +86,19 @@ const AgentPage = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
 
+    const handleToggle = () => {
+        setActive(!isActive);
+    }
+
     return <>
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <div className="agent-profile">A</div>
+                    <button onClick={() => {handleToggle(); setShow(true)}} className="agent-profile">-</button>
                     <button onClick={signOut}>SIGN OUT</button>
                 </div>
                 <div className="container">
-                    <div className="chat-list-left">
+                    <div className={isActive? "open" : "chat-list-left" }>
                         <h1>Chats</h1>
                         <div className="chats">
                             <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>Ongoing</div>
@@ -103,7 +108,7 @@ const AgentPage = () => {
                             <div hidden={showOngoing}>
                                 <div className="list">
                                     {ongoingChats.map(c => (
-                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); setActive(false) }} className={chatId === c.id ? "selected" : "normal"}>
                                             <ChatItem chat={c} />
                                         </div>
                                     ))}
@@ -112,7 +117,7 @@ const AgentPage = () => {
                             <div hidden={showArchived}>
                                 <div className="list">
                                     {archivedChats.map(c => (
-                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); }} className={chatId === c.id ? "selected" : "normal"}>
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); setActive(false) }} className={chatId === c.id ? "selected" : "normal"}>
                                             <ChatItem chat={c} />
                                         </div>
                                     ))}
