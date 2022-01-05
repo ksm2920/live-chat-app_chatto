@@ -22,8 +22,8 @@ const ChatModal = () => {
     const [userFirstMsg, setUserFirstMsg] = useState("");
 
     const createNewChat = () => {
-        const random = Math.floor(Math.random() * 100) + 1
-        const id = "Chat" + random + " - " + userName;
+        // const random = Math.floor(Math.random() * 100) + 1
+        const id = userName + "_" + userEmail;
         FireClient.db.collection("chats").doc(id).set({
             id: id,
             username: userName,

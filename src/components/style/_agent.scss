@@ -92,7 +92,9 @@
 .list {
     border-radius: 5px;
     .chat-item {
-        padding: 20px;
+        padding: 10px;
+        font-size: 15px;
+        word-wrap: break-word;
         &:hover {
             background-color: #b8d1da;
         }
@@ -117,6 +119,7 @@
         .chat-header {
             position: relative;
             padding: 83px 10px 10px;
+            word-wrap: break-word;
             @include respond(medium) {
                 padding-top: 20px;
             }
