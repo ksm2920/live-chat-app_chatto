@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiSupport } from "react-icons/bi";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
@@ -21,6 +21,18 @@ const ChatModal = () => {
     const [userEmail, setUserEmail] = useState("");
     const [userFirstMsg, setUserFirstMsg] = useState("");
 
+    useEffect(() => {
+        const chatIdFromLS = localStorage.getItem("chatId")
+        if (chatIdFromLS) {
+            setChatId(chatIdFromLS!);
+            console.log(chatIdFromLS);
+            setShow(false);
+            setShowBtn(true);
+            subscribeMessage(chatIdFromLS);
+        } 
+
+    }, [chatId]);
+
     const createNewChat = () => {
         // const random = Math.floor(Math.random() * 100) + 1
         const id = userName + "_" + userEmail;
@@ -37,6 +49,7 @@ const ChatModal = () => {
         setUserName("");
         setUserEmail("");
         setUserFirstMsg("");
+        localStorage.setItem('chatId', id);
     }
 
     const subscribeMessage = (chatId: string) => {
@@ -76,6 +89,7 @@ const ChatModal = () => {
         await FireClient.db.collection("chats").doc(chatId).update({ archived: true })
         setShow(true);
         setShowBtn(false);
+        localStorage.clear();
         // let docRef = await FireClient.db.collection("chats").doc(chatId).collection("messages");
         // docRef.get().then((querySnapshot) => {
         //     Promise.all(querySnapshot.docs.map((d) => d.ref.delete()));
