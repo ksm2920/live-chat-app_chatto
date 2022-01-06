@@ -134,7 +134,7 @@ const AgentPage = () => {
                                 <div>
                                     <button className="leave-btn" onClick={archiveChat}><RiCloseFill /></button>
                                 </div>
-                                <h1>{chatId}</h1>
+                                <h1 className="chat-id">{chatId}</h1>
                             </div>
                             <div className="chat-body">
                                 <ul>
