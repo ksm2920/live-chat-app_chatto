@@ -1,9 +1,8 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import { useEffect, useRef, useState } from "react";
-import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
-import { FaList, FaSignOutAlt } from "react-icons/fa";
 import { FiList, FiLogOut } from "react-icons/fi";
+import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
@@ -110,7 +109,7 @@ const AgentPage = () => {
                             <div hidden={showOngoing}>
                                 <div className="list">
                                     {ongoingChats.map(c => (
-                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); setActive(false) }} className={chatId === c.id ? "selected" : "normal"}>
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); setActive(false) }} className={chatId === c.id ? "selected" : "normal"} id="cy-ongoing">
                                             <ChatItem chat={c} />
                                         </div>
                                     ))}

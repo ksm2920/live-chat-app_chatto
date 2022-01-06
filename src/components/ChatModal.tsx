@@ -118,18 +118,21 @@ const ChatModal = () => {
                                     type="text"
                                     value={userName}
                                     onChange={handleOnChangeUserName}
+                                    id="cy-name"
                                 />
                                 <label>E-mail</label>
                                 <input
                                     type="email"
                                     value={userEmail}
                                     onChange={handleOnChangeUserEmail}
+                                    id="cy-email"
                                 />
                                 <label>Message</label>
                                 <textarea
                                     rows={5}
                                     value={userFirstMsg}
                                     onChange={handleOnChangeUserFirstMsg}
+                                    id="cy-msg"
                                 />
                                 <button onClick={() => {
                                     createNewChat();
@@ -137,7 +140,8 @@ const ChatModal = () => {
                                     setShow(false)
                                 }}
                                     type="button"
-                                    disabled={!userName || !userEmail || !userFirstMsg}>
+                                    disabled={!userName || !userEmail || !userFirstMsg}
+                                    id="cy-send-btn">
                                     Send
                                 </button>
                             </form>
