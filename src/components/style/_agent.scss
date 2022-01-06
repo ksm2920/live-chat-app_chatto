@@ -120,6 +120,9 @@
             @include respond(medium) {
                 max-height: 74vh;
             }
+            @include respond(small) {
+                max-height: 71vh;
+            }
             .agent {
                 text-align: right;
                 @include msg-box;
