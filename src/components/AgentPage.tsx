@@ -2,6 +2,8 @@ import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import { useEffect, useRef, useState } from "react";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
+import { FaList, FaSignOutAlt } from "react-icons/fa";
+import { FiList, FiLogOut } from "react-icons/fi";
 import { FireClient } from "../FireClient";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
@@ -94,8 +96,8 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => {handleToggle(); setShow(true)}} className="agent-profile">-</button>
-                    <button onClick={signOut}>SIGN OUT</button>
+                    <button onClick={() => {handleToggle(); setShow(true)}} className="list-icon"><FiList/></button>
+                    <button onClick={signOut} className="sign-out"><FiLogOut/></button>
                 </div>
                 <div className="container">
                     <div className={isActive? "open" : "chat-list-left" }>

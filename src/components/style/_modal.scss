@@ -41,7 +41,6 @@
             }
             .user-photo {
                 float: left;
-                @include agent-profile;
               }
         }
         .guest {

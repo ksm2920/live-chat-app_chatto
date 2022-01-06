@@ -9,21 +9,21 @@
     height: 10vh;
     background: #5298b0;
     position: relative;
-    .agent-profile {
-        position: absolute;
-        top: 15%;
-        left: 2%;
-        @include agent-profile;
+    .list-icon {
+        display: none;
+        @include respond(medium) {
+            display: inline;
+            left: 2%;
+            font-size: 40px;
+            top: 10%;
+            @include button;
+        }
     }
-    button {
-        position: absolute;
+    .sign-out {
         right: 2%;
-        top: 30%;
-        background-color: black;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
+        font-size: 30px;
+        top: 17%;
+        @include button;
     }
 }
 
@@ -32,40 +32,14 @@
     float: left;
     overflow-y: auto;
     box-shadow: 1px 1px 5px #bdbdbd;
-    transition: transform 250ms ease-in;
+    transition: transform 300ms ease-in-out;
     @include respond(medium) {
         width: 40vw;
     }
     @include respond(small) {
         width: 90vw;
     }
-    h1 {
-        text-align: center;
-        font-size: 25px;
-    }
-    div {
-        font-size: 20px;
-        cursor: pointer;
-    }
-    .chats {
-        padding-bottom: 60px;
-        border-bottom: 1px solid rgb(223, 223, 223);
-        // @include respond(medium) {
-        //     display: flex;
-        //     flex-direction: column;
-        //     padding-bottom: 0px;
-        // }
-        .ongoing {
-            float: left;
-            padding: 19px;
-            @include hover;
-        }
-        .archived {
-            float: right;
-            padding: 19px;
-            @include hover;
-        }
-    }
+    @include chat-list;
 }
 
 .chat-list-left {
@@ -79,34 +53,9 @@
         width: 330px;
         left: 0px;
         transform: translateX(-330px);
+        // transition: transform 250ms ease-in-out;
     }
-    h1 {
-        text-align: center;
-        font-size: 25px;
-    }
-    div {
-        font-size: 20px;
-        cursor: pointer;
-    }
-    .chats {
-        padding-bottom: 60px;
-        border-bottom: 1px solid rgb(223, 223, 223);
-        // @include respond(medium) {
-        //     display: flex;
-        //     flex-direction: column;
-        //     padding-bottom: 0px;
-        // }
-        .ongoing {
-            float: left;
-            padding: 19px;
-            @include hover;
-        }
-        .archived {
-            float: right;
-            padding: 19px;
-            @include hover;
-        }
-    }
+    @include chat-list;
 }
 
 .selected {
@@ -132,7 +81,7 @@
 
 .chat-box-right {
     padding-left: 10px;
-    width: 70vw;
+    width: 67vw;
     float: left;
     @include respond(medium) {
         width: 95vw;
@@ -178,7 +127,6 @@
                     margin-left: 20%;
                 }
                 .user-photo {
-                    @include agent-profile;
                     float: right;
                 }
             }
