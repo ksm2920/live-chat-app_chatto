@@ -18,12 +18,6 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
 
     return (
         <div className={`${messageFrom}`}>
-            {/* <div>
-                {format(new Date(message.createdAt), "mm/dd/yyyy")}
-            </div> */}
-            {/* {message.userName === "Agent" ? (
-                <div className="user-photo">A</div>
-            ) : null} */}
             {message.userName ? <div><b>{message.userName}</b></div> : null}
             <p>{message.text}</p>
             <div>
