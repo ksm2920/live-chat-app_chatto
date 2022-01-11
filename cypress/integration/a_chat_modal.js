@@ -13,6 +13,7 @@ describe("The Landing Page", () => {
         cy.get("#cy-send-btn").click();
         cy.contains("Chat with us!").wait(1000);
     })
+    
     afterEach(() => {
         cy.saveLocalStorage();
     });

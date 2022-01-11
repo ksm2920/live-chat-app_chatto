@@ -20,12 +20,11 @@ const ChatModal = () => {
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userFirstMsg, setUserFirstMsg] = useState("");
+    const chatIdFromLS = localStorage.getItem("chatId");
 
     useEffect(() => {
-        const chatIdFromLS = localStorage.getItem("chatId")
         if (chatIdFromLS) {
             setChatId(chatIdFromLS!);
-            console.log(chatIdFromLS);
             setShow(false);
             setShowBtn(true);
             subscribeMessage(chatIdFromLS);
