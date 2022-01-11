@@ -24,6 +24,7 @@ const AgentPage = () => {
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [agent, setAgent] = useState(() => auth.currentUser);
     const [isActive, setActive] = useState(false);
+    let chatIdFromLS = localStorage.getItem("chatId");
 
     useEffect(() => {
         auth.onAuthStateChanged(agent => {
@@ -39,7 +40,7 @@ const AgentPage = () => {
         FireClient.subscribeToArchivedChats(chats => {
             setArchivedChats(chats)
         })
-    }, [chatId])
+    }, [chatId]);
 
     const signOut = async () => {
         try {
@@ -50,6 +51,12 @@ const AgentPage = () => {
     }
 
     const openChat = (chatId: string) => {
+        localStorage.setItem("chatId", chatId);
+        setChatId(chatId);
+        subscribeMessage(chatId);
+    }
+
+    const subscribeMessage = (chatId: string) => {
         return FireClient.subscribeToMessages(chatId, (messages) => {
             setMessages(messages);
             scrollToBottom();
@@ -69,6 +76,7 @@ const AgentPage = () => {
     const archiveChat = async () => {
         await FireClient.db.collection("chats").doc(chatId).update({ archived: true })
         setShow(true);
+        localStorage.clear();
     }
 
     const showOngoingChats = () => {
@@ -95,11 +103,11 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => {handleToggle(); setShow(true)}} className="list-icon"><FiList/></button>
-                    <button onClick={signOut} className="sign-out"><FiLogOut/></button>
+                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon"><FiList /></button>
+                    <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
                 <div className="container">
-                    <div className={isActive? "open" : "chat-list-left" }>
+                    <div className={isActive ? "open" : "chat-list-left"}>
                         <h1>Chats</h1>
                         <div className="chats">
                             <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>Ongoing</div>
@@ -109,7 +117,7 @@ const AgentPage = () => {
                             <div hidden={showOngoing}>
                                 <div className="list">
                                     {ongoingChats.map(c => (
-                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); setActive(false) }} className={chatId === c.id ? "selected" : "normal"} id="cy-ongoing">
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={chatId === c.id ? "selected" : "normal"} id="cy-ongoing">
                                             <ChatItem chat={c} />
                                         </div>
                                     ))}
@@ -118,7 +126,7 @@ const AgentPage = () => {
                             <div hidden={showArchived}>
                                 <div className="list">
                                     {archivedChats.map(c => (
-                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setChatId(c.id!); setActive(false) }} className={chatId === c.id ? "selected" : "normal"}>
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={chatId === c.id ? "selected" : "normal"}>
                                             <ChatItem chat={c} />
                                         </div>
                                     ))}
