@@ -22,6 +22,7 @@ export class FireClient {
 
         let message = new Message();
         message.text = firstmsg;
+        message.isRead = false;
         
         await FireClient.db.collection("chats").doc(chatId)
         .collection("messages").add(Utils.plain(message));
@@ -34,6 +35,7 @@ export class FireClient {
         let message = new Message();
         message.text = text;
         message.chatId = chatId;
+        message.isRead = false;
         if(user) {
             message.userName = "Agent";
         } else {

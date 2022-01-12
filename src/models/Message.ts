@@ -3,7 +3,7 @@ export class Message {
     public text?: string;
     public createdAt: Date = new Date();
     public chatId: string = "";
-    public userPhoto?: string;
     public userName?: string;
     public userEmail?: string;
+    public isRead?: boolean;
 }
