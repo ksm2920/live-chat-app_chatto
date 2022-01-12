@@ -11,7 +11,7 @@ import FirebaseUIAuth from "./FirebaseAuthLocalized";
 import MessageItem from "./MessageItem";
 
 const auth = firebase.auth();
-let unsubscriberMessages: () => void = () => { console.log("nothing"); }
+let unsubscriberMessages: () => void = () => { console.log("unsubbing nothing"); }
 
 const AgentPage = () => {
     const [show, setShow] = useState(true);
