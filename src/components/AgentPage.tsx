@@ -11,6 +11,7 @@ import FirebaseUIAuth from "./FirebaseAuthLocalized";
 import MessageItem from "./MessageItem";
 
 const auth = firebase.auth();
+let unsubscriberMessages: () => void = () => { console.log("nothing"); }
 
 const AgentPage = () => {
     const [show, setShow] = useState(true);
@@ -24,6 +25,7 @@ const AgentPage = () => {
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [agent, setAgent] = useState(() => auth.currentUser);
     const [isActive, setActive] = useState(false);
+    // const [unsubscriberMessages, setUnsubscriberMessages] = useState<() => void>();
     let chatIdFromLS = localStorage.getItem("chatId");
 
     useEffect(() => {
@@ -56,11 +58,21 @@ const AgentPage = () => {
         subscribeMessage(chatId);
     }
 
-    const subscribeMessage = (chatId: string) => {
-        return FireClient.subscribeToMessages(chatId, (messages) => {
+    const subscribeMessage = (chatId: string) => {        
+        unsubscriberMessages();
+        unsubscriberMessages = ()=>{console.log("resetted")}
+
+        let unsub = FireClient.subscribeToMessages(chatId, (messages) => {
+            console.log('messages received');
+
             setMessages(messages);
             scrollToBottom();
-        })
+        });
+
+        if (unsub)
+            unsubscriberMessages = unsub!;
+
+        // setUnsubscriberMessages(unsub);
     }
 
     const handelOnSubmit = (e: any) => {
