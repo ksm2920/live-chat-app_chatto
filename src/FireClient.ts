@@ -64,6 +64,26 @@ export class FireClient {
             })
     }
 
+    static subscribeToAllMessages(handler: (messages: Message[]) => void) {
+        console.log("#subscribeToAllMessages called");
+        
+        if (!FireClient.db)
+            return;
+
+        return FireClient.db
+            .collectionGroup("messages")
+            .orderBy("createdAt")
+            .limit(1000)
+            .onSnapshot((querySnaps) => {
+                const messages = querySnaps.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id,
+                } as Message))
+
+                handler(messages);
+            })
+    }
+
     static subscribeToOngoingChats(handler: (chats: Chat[]) => void) {
         if (!FireClient.db)
             return;
