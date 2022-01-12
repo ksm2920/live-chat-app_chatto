@@ -17,15 +17,14 @@ export class FireClient {
     static db = firebase.firestore();
 
     static async saveUserIfo(firstmsg: string, chatId: string) {
-        if(!FireClient.db)
-        return;
+        if (!FireClient.db)
+            return;
 
         let message = new Message();
         message.text = firstmsg;
-        message.isRead = false;
-        
+
         await FireClient.db.collection("chats").doc(chatId)
-        .collection("messages").add(Utils.plain(message));
+            .collection("messages").add(Utils.plain(message));
     }
 
     static async postMessage(text: string, chatId: string, user: firebase.User) {
@@ -35,8 +34,8 @@ export class FireClient {
         let message = new Message();
         message.text = text;
         message.chatId = chatId;
-        message.isRead = false;
-        if(user) {
+
+        if (user) {
             message.userName = "Agent";
         } else {
             message.userName = "";
@@ -66,14 +65,15 @@ export class FireClient {
             })
     }
 
-    static subscribeToAllMessages(handler: (messages: Message[]) => void) {
+    static subscribeToUnreadMessages(handler: (messages: Message[]) => void) {
         console.log("#subscribeToAllMessages called");
-        
+
         if (!FireClient.db)
             return;
 
         return FireClient.db
             .collectionGroup("messages")
+            .where('isRead', '==', false)
             .orderBy("createdAt")
             .limit(1000)
             .onSnapshot((querySnaps) => {
@@ -81,7 +81,8 @@ export class FireClient {
                     ...doc.data(),
                     id: doc.id,
                 } as Message))
-
+                console.log('unread messages', messages);
+                
                 handler(messages);
             })
     }
@@ -120,6 +121,16 @@ export class FireClient {
                 } as Chat))
                 handler(chats);
             })
+    }
+    //.updateField(offer.id!, "offers", { rank: rank });
+    async updateField(id: string, collection: string, field: any): Promise<void> {
+        await FireClient.db.collection(collection).doc(id).update(field);
+    }
+
+    static async updateMessageIsRead(chatId: string, msgId: string, isReadValue: boolean): Promise<void> {
+        console.info('#### updateMessageIsRead')
+        await FireClient.db.collection('chats').doc(chatId)
+            .collection('messages').doc(msgId).update({isRead: isReadValue});
     }
 }
 

@@ -3,12 +3,13 @@ import { Chat } from "../models/Chat";
 
 
 type ChatProps = {
-    chat: Chat
+    chat: Chat,
+    nrUnread: number
 }
-const ChatItem: FunctionComponent<ChatProps> = ({ chat }) => {
+const ChatItem: FunctionComponent<ChatProps> = ({ chat, nrUnread }) => {
     return (
         <div className="chat-item">
-            {chat.id}
+            {chat.id} {nrUnread > 0 && <span>{nrUnread}</span>}
         </div>
     )
 }

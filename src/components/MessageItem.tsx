@@ -19,7 +19,8 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
     return (
         <div className={`${messageFrom}`}>
             {message.userName ? <div><b>{message.userName}</b></div> : null}
-            <p>{message.text}</p>
+            {/* {!message.isRead && <span>NOT READ</span>} */}
+            <p> {message.text}</p>
             <div>
                 {format(new Date(message.createdAt), "MM/dd/yy, HH:mm:ss")}
             </div>

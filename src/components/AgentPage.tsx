@@ -17,16 +17,15 @@ const AgentPage = () => {
     const [show, setShow] = useState(true);
     const [showOngoing, setShowOngoing] = useState(false);
     const [showArchived, setShowArchived] = useState(true);
-    const [chatId, setChatId] = useState("");
+    const [currentChatId, setCurrentChatId] = useState("");
     const [ongoingChats, setOngoingChats] = useState<Chat[]>([]);
     const [archivedChats, setArchivedChats] = useState<Chat[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
+    const [unreadMessages, setunreadMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [agent, setAgent] = useState(() => auth.currentUser);
     const [isActive, setActive] = useState(false);
-    // const [unsubscriberMessages, setUnsubscriberMessages] = useState<() => void>();
-    let chatIdFromLS = localStorage.getItem("chatId");
 
     useEffect(() => {
         auth.onAuthStateChanged(agent => {
@@ -41,8 +40,19 @@ const AgentPage = () => {
         })
         FireClient.subscribeToArchivedChats(chats => {
             setArchivedChats(chats)
-        })
-    }, [chatId]);
+        });
+        FireClient.subscribeToUnreadMessages((unreadMsg) => {
+            setunreadMessages(unreadMsg);
+            console.log('subscribeToUnreadMessages received', unreadMsg);
+            let nrOfUnread = 0;
+            unreadMsg.map((m) => {
+                nrOfUnread += m.isRead ? 0 : 1; 
+            })
+            console.log('unreadmsgs.length', nrOfUnread);
+        });
+
+
+    }, []);
 
     const signOut = async () => {
         try {
@@ -54,30 +64,45 @@ const AgentPage = () => {
 
     const openChat = (chatId: string) => {
         localStorage.setItem("chatId", chatId);
-        setChatId(chatId);
+        setCurrentChatId(chatId);
         subscribeMessage(chatId);
+        // setToReadMessages(allMessages, chatId);
+        // console.log(allMessages);
+        // isReadMessages(chatId);
     }
 
-    const subscribeMessage = (chatId: string) => {        
+    const subscribeMessage = (chatId: string) => {
         unsubscriberMessages();
-        unsubscriberMessages = ()=>{console.log("resetted")}
+        unsubscriberMessages = () => { console.log("resetted") }
 
         let unsub = FireClient.subscribeToMessages(chatId, (messages) => {
-            console.log('messages received');
-
+            console.log('subscribeToMessages received', messages);
             setMessages(messages);
+            // setToReadMessages(messages, chatId);
+            messages.forEach((m) => {
+                if (m.isRead === false)  {
+                    FireClient.updateMessageIsRead(chatId, m.id!, true);
+                    // m.isRead = true;
+                }
+            });
             scrollToBottom();
         });
 
         if (unsub)
             unsubscriberMessages = unsub!;
+    }
 
-        // setUnsubscriberMessages(unsub);
+    const setToReadMessages = async (allMessages: Message[], _chatId: string) => {
+        let messagesInChat = allMessages.filter(m => m.chatId == _chatId);
+        console.log('The chat Id is ' + _chatId);
+        messagesInChat.map((m) => {
+            m.isRead = true;
+        });
     }
 
     const handelOnSubmit = (e: any) => {
         e.preventDefault();
-        FireClient.postMessage(newMessage, chatId, auth.currentUser!);
+        FireClient.postMessage(newMessage, currentChatId, auth.currentUser!);
         setNewMessage("");
     }
 
@@ -86,7 +111,7 @@ const AgentPage = () => {
     }
 
     const archiveChat = async () => {
-        await FireClient.db.collection("chats").doc(chatId).update({ archived: true })
+        await FireClient.db.collection("chats").doc(currentChatId).update({ archived: true })
         setShow(true);
         localStorage.clear();
     }
@@ -129,8 +154,8 @@ const AgentPage = () => {
                             <div hidden={showOngoing}>
                                 <div className="list">
                                     {ongoingChats.map(c => (
-                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={chatId === c.id ? "selected" : "normal"} id="cy-ongoing">
-                                            <ChatItem chat={c} />
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={currentChatId === c.id ? "selected" : "normal"} id="cy-ongoing">
+                                            <ChatItem chat={c} nrUnread={ currentChatId == c.id ? 0 : unreadMessages.filter(m => m.chatId == c.id).length} />
                                         </div>
                                     ))}
                                 </div>
@@ -138,8 +163,8 @@ const AgentPage = () => {
                             <div hidden={showArchived}>
                                 <div className="list">
                                     {archivedChats.map(c => (
-                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={chatId === c.id ? "selected" : "normal"}>
-                                            <ChatItem chat={c} />
+                                        <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={currentChatId === c.id ? "selected" : "normal"}>
+                                            <ChatItem chat={c} nrUnread={currentChatId == c.id ? 0 : unreadMessages.filter(m => m.chatId == c.id).length}/>
                                         </div>
                                     ))}
                                 </div>
@@ -153,7 +178,7 @@ const AgentPage = () => {
                                 <div>
                                     <button className="leave-btn" onClick={archiveChat}><RiCloseFill /></button>
                                 </div>
-                                <h1 className="chat-id">{chatId}</h1>
+                                <h1 className="chat-id">{currentChatId}</h1>
                             </div>
                             <div className="chat-body">
                                 <ul>
@@ -181,9 +206,7 @@ const AgentPage = () => {
                         </div>
                     </div>
                     <div className="clear"></div>
-
                 </div>
-                {/* <div className="footer"></div> */}
             </div>
         ) : (
             <>

@@ -5,5 +5,5 @@ export class Message {
     public chatId: string = "";
     public userName?: string;
     public userEmail?: string;
-    public isRead?: boolean;
+    public isRead = false;
 }
