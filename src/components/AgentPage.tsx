@@ -20,6 +20,7 @@ const AgentPage = () => {
     const [ongoingChats, setOngoingChats] = useState<Chat[]>([]);
     const [archivedChats, setArchivedChats] = useState<Chat[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
+    const [allMessages, setAllMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [agent, setAgent] = useState(() => auth.currentUser);
@@ -27,6 +28,8 @@ const AgentPage = () => {
     let chatIdFromLS = localStorage.getItem("chatId");
 
     useEffect(() => {
+        console.log('useEffect called');
+        
         auth.onAuthStateChanged(agent => {
             if (agent) {
                 setAgent(agent);
@@ -34,13 +37,24 @@ const AgentPage = () => {
                 setAgent(null);
             }
         })
-        FireClient.subscribeToOngoingChats(chats => {
+        let unsub1 = FireClient.subscribeToOngoingChats(chats => {
             setOngoingChats(chats)
         })
-        FireClient.subscribeToArchivedChats(chats => {
+        let unsub2 = FireClient.subscribeToArchivedChats(chats => {
             setArchivedChats(chats)
         })
-    }, [chatId]);
+        let unsub3 = FireClient.subscribeToAllMessages((allMessages) => {
+            console.log("SubscribeMessages event ", chatId);
+            setAllMessages(allMessages);
+            reloadMessages(allMessages, chatId);
+
+            const lastMsg = allMessages[allMessages.length - 1];
+            if(lastMsg.chatId != chatId) {
+                console.log(`From another chatroom ${lastMsg.text}`)
+            }
+        })
+
+    }, []);
 
     const signOut = async () => {
         try {
@@ -50,17 +64,23 @@ const AgentPage = () => {
         }
     }
 
-    const openChat = (chatId: string) => {
-        localStorage.setItem("chatId", chatId);
-        setChatId(chatId);
-        subscribeMessage(chatId);
+    const openChat = (_chatId: string) => {
+        console.log('openchat is set to ' + _chatId );
+        
+        localStorage.setItem("chatId", _chatId);
+        setChatId(_chatId);
+        reloadMessages(allMessages, _chatId);
     }
 
-    const subscribeMessage = (chatId: string) => {
-        return FireClient.subscribeToMessages(chatId, (messages) => {
-            setMessages(messages);
+
+    const reloadMessages = (allMessages: Message[], _chatId: string) => {
+        let messagesInChat = allMessages.filter(m => m.chatId == _chatId);
+        console.log('The chat Id is ' + _chatId );
+        if(messages.length != messagesInChat.length) {
+            setMessages(messagesInChat);
             scrollToBottom();
-        })
+        }
+
     }
 
     const handelOnSubmit = (e: any) => {

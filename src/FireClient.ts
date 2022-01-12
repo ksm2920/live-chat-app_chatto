@@ -53,7 +53,27 @@ export class FireClient {
             .doc(chatId)
             .collection("messages")
             .orderBy("createdAt")
-            .limit(100)
+            .limit(1000)
+            .onSnapshot((querySnaps) => {
+                const messages = querySnaps.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id,
+                } as Message))
+
+                handler(messages);
+            })
+    }
+
+    static subscribeToAllMessages(handler: (messages: Message[]) => void) {
+        console.log("#subscribeToAllMessages called");
+        
+        if (!FireClient.db)
+            return;
+
+        return FireClient.db
+            .collectionGroup("messages")
+            .orderBy("createdAt")
+            .limit(1000)
             .onSnapshot((querySnaps) => {
                 const messages = querySnaps.docs.map(doc => ({
                     ...doc.data(),
