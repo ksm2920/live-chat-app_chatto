@@ -34,7 +34,7 @@ const ChatModal = () => {
 
     const createNewChat = () => {
         // const random = Math.floor(Math.random() * 100) + 1
-        const id = userName + "_" + userEmail;
+        const id = userName + " | " + userEmail;
         FireClient.db.collection("chats").doc(id).set({
             id: id,
             username: userName,
