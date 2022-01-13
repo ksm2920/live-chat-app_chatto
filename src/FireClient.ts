@@ -22,6 +22,7 @@ export class FireClient {
 
         let message = new Message();
         message.text = firstmsg;
+        message.chatId = chatId;
 
         await FireClient.db.collection("chats").doc(chatId)
             .collection("messages").add(Utils.plain(message));
