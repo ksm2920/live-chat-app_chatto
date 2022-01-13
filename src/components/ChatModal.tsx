@@ -183,7 +183,7 @@ const ChatModal = () => {
                                     onChange={handleOnChangeNewMsg}
                                     placeholder="Write a message"
                                 />
-                                <button type="submit" disabled={!newMessage}>
+                                <button type="submit" disabled={!newMessage} className="send-btn">
                                     <RiSendPlaneFill />
                                 </button>
                             </form>
