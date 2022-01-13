@@ -140,7 +140,7 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon"><FiList /></button>
+                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon"><FiList />{unreadMessages? <span>{unreadMessages.length}</span> : ""}</button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
                 <div className="container">
