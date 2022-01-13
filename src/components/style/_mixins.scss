@@ -1,4 +1,4 @@
-@import "layout";
+@import "layout","variable";
 
 @mixin message-box {
     overflow-y: auto;
@@ -15,7 +15,7 @@
         position: relative;
         border: none;
         border-radius: 30px;
-        box-shadow: 1px 1px 5px #8d8d8d;
+        box-shadow: 1px 1px 5px $shadow-color;
         padding: 10px;
     }
     button {
@@ -44,7 +44,8 @@
 
 @mixin hover {
     &:hover {
-        background-color: #b8d1da;
+        background-color: $selected-color;
+        color: white;
     }
 }
 
@@ -52,7 +53,7 @@
     margin: 10px 0;
     p {
         display: inline-block;
-        background-color: lightgray;
+        background-color: $sub-color2;
         padding: 10px;
         margin: 2px 10px;
         border-radius: 5px;
@@ -76,7 +77,7 @@
     }
     .chats {
         padding-bottom: 60px;
-        border-bottom: 1px solid rgb(223, 223, 223);
+        border-bottom: 1px solid #bdbdbd;
         .ongoing {
             float: left;
             padding: 19px;
@@ -94,7 +95,7 @@
     position: absolute;
     color: white;
     border: none;
-    background-color:#5298b0;
+    background-color: $main-color;
     padding: 10px 20px;
     cursor: pointer;
 }

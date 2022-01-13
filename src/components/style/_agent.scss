@@ -1,4 +1,4 @@
-@import "mixins";
+@import "mixins","variable";
 
 .wrap {
     width: 100vw;
@@ -7,7 +7,7 @@
 
 .header {
     height: 10vh;
-    background: #5298b0;
+    background: $main-color;
     position: relative;
     .list-icon {
         display: none;
@@ -31,7 +31,7 @@
     height: 90vh;
     float: left;
     overflow-y: auto;
-    box-shadow: 1px 1px 5px #bdbdbd;
+    box-shadow: 1px 1px 5px $shadow-color;
     transition: transform 300ms ease-in-out;
     @include respond(medium) {
         width: 40vw;
@@ -47,7 +47,7 @@
     height: 90vh;
     float: left;
     overflow-y: auto;
-    box-shadow: 1px 1px 5px #bdbdbd;
+    box-shadow: 1px 1px 5px $shadow-color;
     @include respond(medium) {
         position: fixed;
         width: 330px;
@@ -58,9 +58,19 @@
     @include chat-list;
 }
 
+.chat-item {
+    span {
+        background-color: $point-color;
+        padding: 5px 8px;
+        color: white;
+        border-radius: 5px;
+    }
+}
+
 .selected {
-    font-weight: bold;
-    background-color: #b8d1da;
+    // font-weight: bold;
+    background-color: $selected-color;
+    color: white;
 }
 
 .normal {
@@ -74,7 +84,8 @@
         font-size: 15px;
         word-wrap: break-word;
         &:hover {
-            background-color: #b8d1da;
+            background-color: $selected-color;
+            color: white;
         }
     }
 }
@@ -98,7 +109,7 @@
             @include respond(medium) {
                 padding-top: 20px;
             }
-            border-bottom: 1px solid rgb(223, 223, 223);
+            border-bottom: 1px solid #bdbdbd;
             .chat-id {
                 margin: 0;
                 font-size: 25px;
@@ -127,7 +138,7 @@
                 text-align: right;
                 @include msg-box;
                 p {
-                    background-color: lightblue;
+                    background-color: $sub-color1;
                     margin-left: 20%;
                 }
                 .user-photo {

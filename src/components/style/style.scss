@@ -1,4 +1,4 @@
-@import "layout", "agent", "mixins", "modal";
+@import "layout", "agent", "mixins", "modal","variable";
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two:ital@0;1&display=swap');
 
 body {
@@ -30,8 +30,8 @@ li {
         padding: 10px;
         border-radius: 50%;
         border: none;
-        box-shadow: 1px 1px 5px #bdbdbd;
-        background-color: #5298b0;
+        box-shadow: 1px 1px 5px $shadow-color;
+        background-color: $main-color;
         height: 70px;
         width: 70px;
         cursor: pointer;
@@ -50,7 +50,7 @@ li {
         text-align: center;
         padding: 40px 20px;
         border: 1px solid lightgray;
-        box-shadow: 1px 1px 5px #bdbdbd;
+        box-shadow: 1px 1px 5px $shadow-color;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -65,7 +65,7 @@ li {
             height: 40px;
             border-radius: 5px;
             border: none;
-            box-shadow: 1px 1px 5px #bdbdbd;
+            box-shadow: 1px 1px 5px $shadow-color;
         }
     }
 }
