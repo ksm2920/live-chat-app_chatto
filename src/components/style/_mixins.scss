@@ -80,13 +80,21 @@
         border-bottom: 1px solid #bdbdbd;
         .ongoing {
             float: left;
-            padding: 19px;
+            padding: 19px 50px;
+            border-top-right-radius: 5px; 
             @include hover;
+            @include respond(large) {
+                padding: 19px 29px;
+            }
         }
         .archived {
             float: right;
-            padding: 19px;
+            padding: 19px 50px;
+            border-top-left-radius: 5px;
             @include hover;
+            @include respond(large) {
+                padding: 19px 29px;
+            }
         }
     }
 }
