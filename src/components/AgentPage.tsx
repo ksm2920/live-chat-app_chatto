@@ -46,7 +46,7 @@ const AgentPage = () => {
             console.log('subscribeToUnreadMessages received', unreadMsg);
             let nrOfUnread = 0;
             unreadMsg.map((m) => {
-                nrOfUnread += m.isRead ? 0 : 1; 
+                nrOfUnread += m.isRead ? 0 : 1;
             })
             console.log('unreadmsgs.length', nrOfUnread);
         });
@@ -80,7 +80,7 @@ const AgentPage = () => {
             setMessages(messages);
             // setToReadMessages(messages, chatId);
             messages.forEach((m) => {
-                if (m.isRead === false)  {
+                if (m.isRead === false) {
                     FireClient.updateMessageIsRead(chatId, m.id!, true);
                     // m.isRead = true;
                 }
@@ -90,14 +90,6 @@ const AgentPage = () => {
 
         if (unsub)
             unsubscriberMessages = unsub!;
-    }
-
-    const setToReadMessages = async (allMessages: Message[], _chatId: string) => {
-        let messagesInChat = allMessages.filter(m => m.chatId == _chatId);
-        console.log('The chat Id is ' + _chatId);
-        messagesInChat.map((m) => {
-            m.isRead = true;
-        });
     }
 
     const handelOnSubmit = (e: any) => {
@@ -140,7 +132,7 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon"><FiList />{unreadMessages? <span>{unreadMessages.length}</span> : ""}</button>
+                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon"><FiList />{unreadMessages.length > 0 ? <span>{unreadMessages.length}</span> : ""}</button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
                 <div className="container">
@@ -155,7 +147,7 @@ const AgentPage = () => {
                                 <div className="list">
                                     {ongoingChats.map(c => (
                                         <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={currentChatId === c.id ? "selected" : "normal"} id="cy-ongoing">
-                                            <ChatItem chat={c} nrUnread={ currentChatId == c.id ? 0 : unreadMessages.filter(m => m.chatId == c.id).length} />
+                                            <ChatItem chat={c} nrUnread={currentChatId == c.id ? 0 : unreadMessages.filter(m => m.chatId == c.id).length} />
                                         </div>
                                     ))}
                                 </div>
@@ -164,7 +156,7 @@ const AgentPage = () => {
                                 <div className="list">
                                     {archivedChats.map(c => (
                                         <div key={c.id} onClick={() => { openChat(c.id!); setShow(false); setActive(false) }} className={currentChatId === c.id ? "selected" : "normal"}>
-                                            <ChatItem chat={c} nrUnread={currentChatId == c.id ? 0 : unreadMessages.filter(m => m.chatId == c.id).length}/>
+                                            <ChatItem chat={c} nrUnread={currentChatId == c.id ? 0 : unreadMessages.filter(m => m.chatId == c.id).length} />
                                         </div>
                                     ))}
                                 </div>
