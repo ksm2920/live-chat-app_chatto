@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Message } from "../models/Message";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 
 type MessageProps = {
@@ -8,6 +9,7 @@ type MessageProps = {
 }
 const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
     const [messageFrom, setMessageFrom] = useState("");
+    const [showStatusIcon, setStatusIcon] = useState(showStatus(window.location.pathname));
     useEffect(() => {
         if (message.userName === "Agent") {
             setMessageFrom("agent");
@@ -19,13 +21,17 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
     return (
         <div className={`${messageFrom}`}>
             {message.userName ? <div><b>{message.userName}</b></div> : null}
-            {/* {!message.isRead && <span>NOT READ</span>} */}
             <p> {message.text}</p>
-            <div>
+            <div className="sending-time">
                 {format(new Date(message.createdAt), "MM/dd/yy, HH:mm:ss")}
+                {showStatusIcon? !message.isRead && <span className="unread"><AiOutlineCheckCircle/></span>: ""} 
+                {showStatusIcon? message.isRead && messageFrom === "guest"? <span className="read"><AiOutlineCheckCircle/></span>: "" : " "}
             </div>
         </div>
     )
+    function showStatus(pathname: string) {
+        return ["/"].includes(pathname);
+    }
 }
 
 export default MessageItem;

@@ -1,4 +1,4 @@
-@import "mixins","variable";
+@import "mixins", "variable";
 
 .chat-modal {
     margin-top: 30vh;
@@ -41,7 +41,7 @@
             }
             .user-photo {
                 float: left;
-              }
+            }
         }
         .guest {
             text-align: right;
@@ -49,6 +49,22 @@
             p {
                 background-color: $sub-color1;
                 margin-left: 20%;
+            }
+            .sending-time {
+                position: relative;
+                right: 10px;
+                .unread {
+                    position: absolute;
+                    bottom: -3px;
+                    right: -20px;
+                    color: darkgray;
+                }
+                .read {
+                    position: absolute;
+                    bottom: -3px;
+                    right: -20px;
+                    color: $point-color;
+                }
             }
         }
     }
