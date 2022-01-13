@@ -11,18 +11,28 @@
     position: relative;
     .list-icon {
         display: none;
+        position: relative;
+        // span {
+        //     position: absolute;
+        //     top:0;
+        //     right: -10px;
+        //     font-size: 15px;
+        //     background-color: $point-color;
+        //     border-radius: 50px;
+        //     padding: 5px 10px;
+        // }
         @include respond(medium) {
             display: inline;
             left: 2%;
             font-size: 40px;
-            top: 10%;
+            top: 30%;
             @include button;
         }
     }
     .sign-out {
         right: 2%;
         font-size: 30px;
-        top: 17%;
+        top: 35%;
         @include button;
     }
 }
