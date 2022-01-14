@@ -55,7 +55,7 @@ export class FireClient {
             .doc(chatId)
             .collection("messages")
             .orderBy("createdAt")
-            .limit(100)
+            .limit(1000)
             .onSnapshot((querySnaps) => {
                 const messages = querySnaps.docs.map(doc => ({
                     ...doc.data(),
