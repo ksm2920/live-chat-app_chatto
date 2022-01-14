@@ -34,10 +34,10 @@ const AgentPage = () => {
             } else {
                 setAgent(null);
             }
-        })
+        });
         FireClient.subscribeToOngoingChats(chats => {
             setOngoingChats(chats)
-        })
+        });
         FireClient.subscribeToArchivedChats(chats => {
             setArchivedChats(chats)
         });
@@ -47,7 +47,7 @@ const AgentPage = () => {
             let nrOfUnread = 0;
             unreadMsg.map((m) => {
                 nrOfUnread += m.isRead ? 0 : 1;
-            })
+            });
             console.log('unreadmsgs.length', nrOfUnread);
         });
 
@@ -132,7 +132,9 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon"><FiList />{unreadMessages.length > 0 ? <span>{unreadMessages.length}</span> : ""}</button>
+                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon">
+                        <FiList />{unreadMessages.length > 0 ? <span>{unreadMessages.length}</span> : ""}
+                    </button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
                 <div className="container">
