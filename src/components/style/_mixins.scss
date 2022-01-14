@@ -86,6 +86,9 @@
             @include respond(large) {
                 padding: 19px 29px;
             }
+            @include respond(medium) {
+                padding: 19px 20px;
+            }
         }
         .archived {
             float: right;
@@ -94,6 +97,9 @@
             @include hover;
             @include respond(large) {
                 padding: 19px 29px;
+            }
+            @include respond(medium) {
+                padding: 19px 20px;
             }
         }
     }
