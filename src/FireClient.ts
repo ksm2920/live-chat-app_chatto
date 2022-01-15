@@ -28,13 +28,17 @@ export class FireClient {
             .collection("messages").add(Utils.plain(message));
     }
 
-    static async postMessage(text: string, chatId: string, user: firebase.User) {
+    static async postMessage(text: string, chatId: string, user: firebase.User, chatIdFromLS: string) {
         if (!FireClient.db)
             return;
-
+            
         let message = new Message();
         message.text = text;
         message.chatId = chatId;
+
+        if(chatId === chatIdFromLS) {
+            message.isRead = true;
+        }
 
         if (user) {
             message.userName = "Agent";
@@ -83,7 +87,7 @@ export class FireClient {
                     id: doc.id,
                 } as Message))
                 console.log('unread messages', messages);
-                
+
                 handler(messages);
             })
     }
@@ -131,7 +135,7 @@ export class FireClient {
     static async updateMessageIsRead(chatId: string, msgId: string, isReadValue: boolean): Promise<void> {
         console.info('#### updateMessageIsRead')
         await FireClient.db.collection('chats').doc(chatId)
-            .collection('messages').doc(msgId).update({isRead: isReadValue});
+            .collection('messages').doc(msgId).update({ isRead: isReadValue });
     }
 }
 

@@ -76,7 +76,8 @@ const ChatModal = () => {
 
     const handelOnSubmit = (e: any) => {
         e.preventDefault();
-        FireClient.postMessage(newMessage, chatId, auth.currentUser!);
+        let chatIdFromLS = "";
+        FireClient.postMessage(newMessage, chatId, auth.currentUser!, chatIdFromLS!);
         setNewMessage("");
     }
 

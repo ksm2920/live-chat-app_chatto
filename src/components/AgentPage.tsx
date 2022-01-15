@@ -44,11 +44,11 @@ const AgentPage = () => {
         FireClient.subscribeToUnreadMessages((unreadMsg) => {
             setunreadMessages(unreadMsg);
             console.log('subscribeToUnreadMessages received', unreadMsg);
-            let nrOfUnread = 0;
-            unreadMsg.map((m) => {
-                nrOfUnread += m.isRead ? 0 : 1;
-            });
-            console.log('unreadmsgs.length', nrOfUnread);
+            // let nrOfUnread = 0;
+            // unreadMsg.map((m) => {
+            //     nrOfUnread += m.isRead ? 0 : 1;
+            // });
+            // console.log('unreadmsgs.length', nrOfUnread);
         });
 
 
@@ -94,7 +94,8 @@ const AgentPage = () => {
 
     const handelOnSubmit = (e: any) => {
         e.preventDefault();
-        FireClient.postMessage(newMessage, currentChatId, auth.currentUser!);
+        let chatIdFromLS = localStorage.getItem("chatId");
+        FireClient.postMessage(newMessage, currentChatId, auth.currentUser!, chatIdFromLS!);
         setNewMessage("");
     }
 
@@ -132,7 +133,7 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => { handleToggle(); setShow(true) }} className="list-icon">
+                    <button onClick={() => { handleToggle(); setShow(true); unsubscriberMessages(); setCurrentChatId(""); localStorage.clear();}} className="list-icon">
                         <FiList />{unreadMessages.length > 0 ? <span>{unreadMessages.length}</span> : ""}
                     </button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
