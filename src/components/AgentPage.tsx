@@ -26,6 +26,7 @@ const AgentPage = () => {
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [agent, setAgent] = useState(() => auth.currentUser);
     const [isActive, setActive] = useState(false);
+    const chatIdFromLS = localStorage.getItem("chatId");
 
     useEffect(() => {
         auth.onAuthStateChanged(agent => {
@@ -133,8 +134,8 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => { handleToggle(); setShow(true); unsubscriberMessages(); setCurrentChatId(""); localStorage.clear();}} className="list-icon">
-                        <FiList />{unreadMessages.length > 0 ? <span>{unreadMessages.length}</span> : ""}
+                    <button onClick={() => { handleToggle(); setShow(true); unsubscriberMessages(); setCurrentChatId(""); localStorage.clear(); }} className="list-icon">
+                        <FiList />{currentChatId !== chatIdFromLS ?  <span>{unreadMessages.length}</span> : <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
                     </button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
