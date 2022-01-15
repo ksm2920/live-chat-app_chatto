@@ -25,14 +25,14 @@
             display: inline;
             left: 2%;
             font-size: 40px;
-            top: 30%;
+            top: 25%;
             @include button;
         }
     }
     .sign-out {
         right: 2%;
         font-size: 30px;
-        top: 35%;
+        top: 30%;
         @include button;
     }
 }
