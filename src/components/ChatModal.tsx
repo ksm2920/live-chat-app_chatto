@@ -6,6 +6,7 @@ import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
+import Utilities from "./Utilities";
 const auth = firebase.auth();
 
 const ChatModal = () => {
@@ -20,6 +21,9 @@ const ChatModal = () => {
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userFirstMsg, setUserFirstMsg] = useState("");
+    const [errorName, setErrorName] = useState(false);
+    const [errorEmail, setErrorEmail] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(false);
     const chatIdFromLS = localStorage.getItem("chatId");
 
     useEffect(() => {
@@ -28,14 +32,14 @@ const ChatModal = () => {
             setShow(false);
             setShowBtn(true);
             subscribeMessage(chatIdFromLS);
-        } 
+        }
 
     }, [chatId]);
 
-    const createNewChat = () => {
+    const createNewChat = async () => {
         // const random = Math.floor(Math.random() * 100) + 1
         const id = userName + " | " + userEmail;
-        FireClient.db.collection("chats").doc(id).set({
+        await FireClient.db.collection("chats").doc(id).set({
             id: id,
             username: userName,
             email: userEmail,
@@ -73,6 +77,29 @@ const ChatModal = () => {
     const handleOnChangeUserFirstMsg = (e: any) => {
         setUserFirstMsg(e.target.value);
     }
+
+    const validate = (): boolean => {
+        let valid = true;
+        if (userName === "") {
+            setErrorName(true);
+            valid = false;
+        } else {
+            setErrorName(false);
+        }
+        if (!Utilities.validateEmail(userEmail)) {
+            setErrorEmail(true);
+            valid = false;
+        } else {
+            setErrorEmail(false);
+        }
+        if (userFirstMsg === "") {
+            setErrorMessage(true);
+            valid = false;
+        } else {
+            setErrorMessage(false);
+        }
+        return valid;
+    };
 
     const handelOnSubmit = (e: any) => {
         e.preventDefault();
@@ -134,6 +161,13 @@ const ChatModal = () => {
                                     onChange={handleOnChangeUserName}
                                     id="cy-name"
                                 />
+                                {errorName ? (
+                                    <p className="error">
+                                        Please enter your name
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                                 <label>E-mail</label>
                                 <input
                                     type="email"
@@ -141,6 +175,13 @@ const ChatModal = () => {
                                     onChange={handleOnChangeUserEmail}
                                     id="cy-email"
                                 />
+                                {errorEmail ? (
+                                    <p className="error">
+                                        Please enter a valid email
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                                 <label>Message</label>
                                 <textarea
                                     rows={5}
@@ -148,16 +189,13 @@ const ChatModal = () => {
                                     onChange={handleOnChangeUserFirstMsg}
                                     id="cy-msg"
                                 />
-                                <button onClick={() => {
-                                    createNewChat();
-                                    setShowForm(true);
-                                    setShow(false)
-                                }}
-                                    type="button"
-                                    disabled={!userName || !userEmail || !userFirstMsg}
-                                    id="cy-send-btn">
-                                    Send
-                                </button>
+                                {errorMessage ? (
+                                    <p className="error">
+                                        Please enter a message
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </form>
                             :
                             <>
@@ -174,7 +212,21 @@ const ChatModal = () => {
 
                     </div>
                     {showForm === false ?
-                        <></>
+                        <div className="user-form">
+                            <button onClick={() => {
+                                if (!validate()) {
+                                    return;
+                                }
+                                createNewChat();
+                                setShowForm(true);
+                                setShow(false)
+                            }}
+                                type="button"
+                                // disabled={!userName || !userEmail || !userFirstMsg}
+                                id="cy-send-btn">
+                                Send
+                            </button>
+                        </div>
                         :
                         <div className="message-input">
                             <form onSubmit={handelOnSubmit}>
