@@ -23,7 +23,7 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
             {message.userName ? <div><b>{message.userName}</b></div> : null}
             <p> {message.text}</p>
             <div className="sending-time">
-                {format(new Date(message.createdAt), "MM/dd/yy, HH:mm:ss")}
+                {format(new Date(message.createdAt), "HH:mm:ss")}
                 {showStatusIcon? !message.isRead && <span className="unread"><AiOutlineCheckCircle/></span>: ""} 
                 {showStatusIcon? message.isRead && messageFrom === "guest"? <span className="read"><AiOutlineCheckCircle/></span>: "" : " "}
             </div>

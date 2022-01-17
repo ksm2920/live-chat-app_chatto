@@ -8,6 +8,7 @@ import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
 import Utilities from "./Utilities";
 import { format } from "date-fns";
+import { Chat } from "../models/Chat";
 const auth = firebase.auth();
 
 const ChatModal = () => {
@@ -34,7 +35,6 @@ const ChatModal = () => {
             setShowBtn(true);
             subscribeMessage(chatIdFromLS);
         }
-
     }, [chatId]);
 
     const createNewChat = async () => {
@@ -47,7 +47,7 @@ const ChatModal = () => {
             created: new Date(),
             archived: false
         })
-        FireClient.saveUserIfo(userFirstMsg, id);
+        await FireClient.saveUserIfo(userFirstMsg, id);
         setChatId(id);
         subscribeMessage(id);
         setUserName("");
@@ -57,7 +57,7 @@ const ChatModal = () => {
     }
 
     const subscribeMessage = (chatId: string) => {
-        return FireClient.subscribeToMessages(chatId, (messages) => {
+        FireClient.subscribeToMessages(chatId, (messages) => {
             setMessages(messages);
             scrollToBottom();
         })
@@ -200,22 +200,38 @@ const ChatModal = () => {
                             </form>
                             :
                             <>
+
                                 <ul>
                                     <li>
                                         <div className="agent">
                                             <div><b>Agent</b></div>
                                             <p>Hello, thank you for using “Chatto” service. Can I help you with something?</p>
                                             <div className="sending-time">
-                                                {format(new Date(), "MM/dd/yy, HH:mm:ss")}
+                                                {format(messages.length > 0 ? new Date(messages[0].createdAt) : new Date(), "HH:mm:ss")}
                                             </div>
                                         </div>
                                     </li>
+                                    {getMessages(messages)}
 
-                                    {messages.map(m => (
-                                        <li key={m.id}>
-                                            <MessageItem message={m} />
-                                        </li>
-                                    ))}
+                                    {/* {messages.map(m => {
+                                        let msgDate = format(new Date(m.createdAt), "MM/dd/yy");
+                                        if (lastDate == msgDate)
+                                            msgDate = "";
+                                        else
+                                            lastDate = msgDate;
+
+                                        console.log('msgDate is', msgDate);
+
+                                        return (
+                                            <>
+                                                {<li><div> {msgDate}xxx</div></li>}
+                                                <li key={m.id}>
+                                                    <MessageItem message={m} />
+                                                </li>
+                                            </>
+                                        )
+                                    }
+                                    )} */}
                                     <div ref={messagesEndRef} />
                                 </ul>
                             </>
@@ -260,6 +276,28 @@ const ChatModal = () => {
 
     function showChatModal(pathname: string) {
         return ["/"].includes(pathname);
+    }
+
+    function getMessages(messages: Message[]) {
+        let lastDate = "";
+        return messages.map(m => {
+            let msgDate = format(new Date(m.createdAt), "MM/dd/yy");
+            if (lastDate == msgDate)
+                msgDate = "";
+            else
+                lastDate = msgDate;
+
+            console.log('msgDate is', msgDate);
+
+            return (
+                <>
+                    {<li><div> {msgDate}</div></li>}
+                    <li key={m.id}>
+                        <MessageItem message={m} />
+                    </li>
+                </>
+            )
+        })
     }
 }
 
