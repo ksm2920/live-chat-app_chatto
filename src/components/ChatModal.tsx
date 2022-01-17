@@ -7,6 +7,7 @@ import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
 import Utilities from "./Utilities";
+import { format } from "date-fns";
 const auth = firebase.auth();
 
 const ChatModal = () => {
@@ -200,6 +201,16 @@ const ChatModal = () => {
                             :
                             <>
                                 <ul>
+                                    <li>
+                                        <div className="agent">
+                                            <div><b>Agent</b></div>
+                                            <p>Hello, thank you for using “Chatto” service. Can I help you with something?</p>
+                                            <div className="sending-time">
+                                                {format(new Date(), "MM/dd/yy, HH:mm:ss")}
+                                            </div>
+                                        </div>
+                                    </li>
+
                                     {messages.map(m => (
                                         <li key={m.id}>
                                             <MessageItem message={m} />
