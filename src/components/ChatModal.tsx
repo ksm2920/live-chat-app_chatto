@@ -200,38 +200,17 @@ const ChatModal = () => {
                             </form>
                             :
                             <>
-
                                 <ul>
                                     <li>
                                         <div className="agent">
                                             <div><b>Agent</b></div>
                                             <p>Hello, thank you for using “Chatto” service. Can I help you with something?</p>
-                                            <div className="sending-time">
+                                            {/* <div className="sending-time">
                                                 {format(messages.length > 0 ? new Date(messages[0].createdAt) : new Date(), "HH:mm:ss")}
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </li>
                                     {getMessages(messages)}
-
-                                    {/* {messages.map(m => {
-                                        let msgDate = format(new Date(m.createdAt), "MM/dd/yy");
-                                        if (lastDate == msgDate)
-                                            msgDate = "";
-                                        else
-                                            lastDate = msgDate;
-
-                                        console.log('msgDate is', msgDate);
-
-                                        return (
-                                            <>
-                                                {<li><div> {msgDate}xxx</div></li>}
-                                                <li key={m.id}>
-                                                    <MessageItem message={m} />
-                                                </li>
-                                            </>
-                                        )
-                                    }
-                                    )} */}
                                     <div ref={messagesEndRef} />
                                 </ul>
                             </>
@@ -291,7 +270,7 @@ const ChatModal = () => {
 
             return (
                 <>
-                    {<li><div> {msgDate}</div></li>}
+                    {<li><div className="chat-date"> {msgDate}</div></li>}
                     <li key={m.id}>
                         <MessageItem message={m} />
                     </li>

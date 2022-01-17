@@ -33,6 +33,9 @@
     .chat-body {
         max-height: 380px;
         @include message-box;
+        .chat-date {
+            text-align: center;
+        }
         .agent {
             text-align: left;
             @include msg-box;
