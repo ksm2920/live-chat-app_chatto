@@ -33,6 +33,10 @@ describe("The Agent Page", () => {
         cy.get(".sign-out").click({ force: true });
     })
 
+    beforeEach(() => {
+        cy.restoreLocalStorage();
+      });
+
     //customer
     it("can get a message from the agent and reply to the agent", () => {
         cy.visit("/").wait(1000);
