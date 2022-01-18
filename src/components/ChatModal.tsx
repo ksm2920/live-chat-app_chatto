@@ -211,7 +211,6 @@ const ChatModal = () => {
                                         </div>
                                     </li>
                                     {getMessages(messages)}
-                                    <div ref={messagesEndRef} />
                                 </ul>
                             </>
                         }
@@ -274,6 +273,7 @@ const ChatModal = () => {
                     <li key={m.id}>
                         <MessageItem message={m} />
                     </li>
+                    <div ref={messagesEndRef} />
                 </>
             )
         })

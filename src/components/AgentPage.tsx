@@ -181,7 +181,6 @@ const AgentPage = () => {
                                 <ul>
                                     {getMessages(messages)}
                                 </ul>
-                                <div ref={messagesEndRef} />
                             </div>
                             <div className="message-input">
                                 <form onSubmit={handelOnSubmit}>
@@ -235,6 +234,7 @@ const AgentPage = () => {
                     <li key={m.id}>
                         <MessageItem message={m} />
                     </li>
+                    <div ref={messagesEndRef} />
                 </>
             )
         })
