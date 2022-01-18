@@ -270,7 +270,7 @@ const ChatModal = () => {
 
             return (
                 <>
-                    {<li><div className="chat-date"> {msgDate}</div></li>}
+                    {<div><div className="date"> {msgDate}</div></div>}
                     <li key={m.id}>
                         <MessageItem message={m} />
                     </li>

@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import { useEffect, useRef, useState } from "react";
@@ -135,7 +136,7 @@ const AgentPage = () => {
             <div className="wrap">
                 <div className="header">
                     <button onClick={() => { handleToggle(); setShow(true); unsubscriberMessages(); setCurrentChatId(""); localStorage.clear(); }} className="list-icon">
-                        <FiList />{currentChatId !== chatIdFromLS ?  <span>{unreadMessages.length}</span> : <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
+                        <FiList />{currentChatId !== chatIdFromLS ? <span>{unreadMessages.length}</span> : <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
                     </button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
@@ -178,11 +179,7 @@ const AgentPage = () => {
                             </div>
                             <div className="chat-body">
                                 <ul>
-                                    {messages.map(m => (
-                                        <li key={m.id}>
-                                            <MessageItem message={m} />
-                                        </li>
-                                    ))}
+                                    {getMessages(messages)}
                                 </ul>
                                 <div ref={messagesEndRef} />
                             </div>
@@ -220,6 +217,28 @@ const AgentPage = () => {
         )
         }
     </>
+
+    function getMessages(messages: Message[]) {
+        let lastDate = "";
+        return messages.map(m => {
+            let msgDate = format(new Date(m.createdAt), "MM/dd/yy");
+            if (lastDate == msgDate)
+                msgDate = "";
+            else
+                lastDate = msgDate;
+
+            console.log('msgDate is', msgDate);
+
+            return (
+                <>
+                    {<div><div className="date"> {msgDate}</div></div>}
+                    <li key={m.id}>
+                        <MessageItem message={m} />
+                    </li>
+                </>
+            )
+        })
+    }
 
 }
 
