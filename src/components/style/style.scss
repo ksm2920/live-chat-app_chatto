@@ -75,6 +75,25 @@ li {
     text-align: center;
 }
 
+.sending-time {
+    position: relative;
+    color: gray;
+    font-size: 12px;
+    span {
+        font-size: 15px;
+    }
+    .unread {
+        position: absolute;
+        right: -20px;
+        color: darkgray;
+    }
+    .read {
+        position: absolute;
+        right: -20px;
+        color: #007d64;
+    }
+}
+
 .error {
     color: $point-color;
     padding: 0;
