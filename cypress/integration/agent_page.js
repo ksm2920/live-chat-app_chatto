@@ -1,13 +1,13 @@
 const authUser = require("../fixtures/auth-user.json");
 describe("The Agent Page", () => {
     const { email, password } = authUser;
-    afterEach(() => {
-        cy.saveLocalStorage();
-    });
-    
     beforeEach(() => {
         cy.restoreLocalStorage();
       });
+      
+    afterEach(() => {
+        cy.saveLocalStorage();
+    });
 
     it("successfully loads", () => {
         cy.visit("/agent").wait(1000);
