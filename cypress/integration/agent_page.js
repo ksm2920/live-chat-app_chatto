@@ -1,6 +1,10 @@
 const authUser = require("../fixtures/auth-user.json");
 describe("The Agent Page", () => {
     const { email, password } = authUser;
+    afterEach(() => {
+        cy.saveLocalStorage();
+    });
+    
     beforeEach(() => {
         cy.restoreLocalStorage();
       });
@@ -32,10 +36,6 @@ describe("The Agent Page", () => {
     it("succefully log out", () => {
         cy.get(".sign-out").click({ force: true });
     })
-
-    beforeEach(() => {
-        cy.restoreLocalStorage();
-      });
 
     //customer
     it("can get a message from the agent and reply to the agent", () => {

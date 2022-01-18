@@ -1,4 +1,7 @@
 describe("The Landing Page", () => {
+    afterEach(() => {
+        cy.saveLocalStorage();
+    });
     it("successfully loads", () => {
         cy.visit("/").wait(1000);
     });
@@ -13,8 +16,4 @@ describe("The Landing Page", () => {
         cy.get("#cy-send-btn").click();
         cy.contains("Chat with us!").wait(1000);
     })
-    
-    afterEach(() => {
-        cy.saveLocalStorage();
-    });
 });
