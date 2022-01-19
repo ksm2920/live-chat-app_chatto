@@ -1,8 +1,7 @@
 import { format } from "date-fns";
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
-import React from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiList, FiLogOut } from "react-icons/fi";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
@@ -46,15 +45,8 @@ const AgentPage = () => {
         });
         FireClient.subscribeToUnreadMessages((unreadMsg) => {
             setunreadMessages(unreadMsg);
-            console.log('subscribeToUnreadMessages received', unreadMsg);
-            // let nrOfUnread = 0;
-            // unreadMsg.map((m) => {
-            //     nrOfUnread += m.isRead ? 0 : 1;
-            // });
-            // console.log('unreadmsgs.length', nrOfUnread);
+            // console.log('subscribeToUnreadMessages received', unreadMsg);
         });
-
-
     }, []);
 
     const signOut = async () => {
@@ -69,9 +61,6 @@ const AgentPage = () => {
         localStorage.setItem("chatId", chatId);
         setCurrentChatId(chatId);
         subscribeMessage(chatId);
-        // setToReadMessages(allMessages, chatId);
-        // console.log(allMessages);
-        // isReadMessages(chatId);
     }
 
     const subscribeMessage = (chatId: string) => {
@@ -81,11 +70,9 @@ const AgentPage = () => {
         let unsub = FireClient.subscribeToMessages(chatId, (messages) => {
             console.log('subscribeToMessages received', messages);
             setMessages(messages);
-            // setToReadMessages(messages, chatId);
             messages.forEach((m) => {
                 if (m.isRead === false) {
                     FireClient.updateMessageIsRead(chatId, m.id!, true);
-                    // m.isRead = true;
                 }
             });
             scrollToBottom();
@@ -123,9 +110,9 @@ const AgentPage = () => {
         setShowArchived(false)
         setShowOngoing(true)
         setShow(true);
-        localStorage.clear();
         unsubscriberMessages();
         setCurrentChatId("")
+        localStorage.clear();
     }
 
     const showChatList = () => {
@@ -151,8 +138,8 @@ const AgentPage = () => {
                     <button onClick={showChatList} className="list-icon">
                         <FiList />
                         {currentChatId !== chatIdFromLS ?
-                            <span>{unreadMessages.length}</span>:
-                            <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
+                            <span>{unreadMessages.length}</span>
+                            : <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
                     </button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
@@ -242,7 +229,7 @@ const AgentPage = () => {
             else
                 lastDate = msgDate;
 
-            console.log('msgDate is', msgDate);
+            // console.log('msgDate is', msgDate);
 
             return (
                 <React.Fragment key={m.id}>

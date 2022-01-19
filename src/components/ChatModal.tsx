@@ -260,7 +260,7 @@ const ChatModal = () => {
             else
                 lastDate = msgDate;
 
-            console.log('msgDate is', msgDate);
+            // console.log('msgDate is', msgDate);
 
             return (
                 <React.Fragment key={m.id}>
