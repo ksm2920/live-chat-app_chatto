@@ -89,6 +89,9 @@
             }
             @include respond(medium) {
                 padding: 19px 20px;
+                span {
+                    display: none;
+                }
             }
             span {
                 position: absolute;
