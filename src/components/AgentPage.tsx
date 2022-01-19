@@ -135,12 +135,19 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={showChatList} className="list-icon">
-                        <FiList />
-                        {currentChatId !== chatIdFromLS ?
-                            <span>{unreadMessages.length}</span>
-                            : <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
-                    </button>
+                    {unreadMessages.length > 0 ?
+                        <button onClick={showChatList} className="list-icon">
+                            <FiList />
+                            {currentChatId !== chatIdFromLS ?
+                                <span>{unreadMessages.length}</span>
+                                : <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
+                        </button>
+                        :
+                        <button onClick={showChatList} className="list-icon">
+                            <FiList />
+                        </button>
+                    }
+
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
                 <div className="container">
