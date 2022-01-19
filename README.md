@@ -1,23 +1,19 @@
-## Available Scripts
+### Chatto customer support chat application
+Chatto enables an agent to chat with multiple customers simultaneously.
 
-In the project directory, you can run:
+###  How to get started
+Run `npm start` to spawn a webserver on port 3000.
 
-### `npm start`
+To try the app locally:
 
-The npm start script will spawn a webserver on port 3000 which hosts the Phonecat app.
-You can verify this by opening your browser and navigating to: http://localhost:3000
+Open the agent page: http://localhost:3000/agent
 
-### `npm run cypress`
+Open the customer page with a different browser (or ingognito mode): http://localhost:3000
 
-You should run the Phonecat app up and running.  We are now ready to run Cypress tests.
+### How to run e2e tests.
+You should have the app up and running. 
 
-### `npm run build`
+Run `npm run cypress`
+We are now ready to run Cypress tests.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
