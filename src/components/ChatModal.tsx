@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { useEffect, useRef, useState } from "react";
@@ -7,8 +8,6 @@ import { FireClient } from "../FireClient";
 import { Message } from "../models/Message";
 import MessageItem from "./MessageItem";
 import Utilities from "./Utilities";
-import { format } from "date-fns";
-import { Chat } from "../models/Chat";
 const auth = firebase.auth();
 
 const ChatModal = () => {

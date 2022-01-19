@@ -20,7 +20,7 @@ const MessageItem: FunctionComponent<MessageProps> = ({ message }) => {
 
     return (
         <div className={`${messageFrom}`}>
-            {message.userName ? <div><b>{message.userName}</b></div> : null}
+            {message.userName? <div className="user-name"><b>{message.userName}</b></div> : null}
             <p> {message.text}</p>
             <div className="sending-time">
                 {format(new Date(message.createdAt), "HH:mm:ss")}
