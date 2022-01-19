@@ -154,7 +154,9 @@ const AgentPage = () => {
                     <div className={isActive ? "open" : "chat-list-left"}>
                         <h1>Chats</h1>
                         <div className="chats">
-                            <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>Ongoing</div>
+                            <div onClick={showOngoingChats} className={showOngoing ? "normal ongoing" : "selected ongoing"}>
+                                Ongoing {unreadMessages.length > 0? <span>New</span> : ""}
+                            </div>
                             <div onClick={showArchivedChats} className={showArchived ? "normal archived" : "selected archived"}>Archived</div>
                         </div>
                         <div>

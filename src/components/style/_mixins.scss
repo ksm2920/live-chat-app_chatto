@@ -82,12 +82,23 @@
             float: left;
             padding: 19px 50px;
             border-top-right-radius: 5px; 
+            position: relative;
             @include hover;
             @include respond(large) {
-                padding: 19px 29px;
+                padding: 19px 25px;
             }
             @include respond(medium) {
                 padding: 19px 20px;
+            }
+            span {
+                position: absolute;
+                background-color: $point-color;
+                padding: 5px 8px;
+                color: white;
+                border-radius: 50px;
+                font-size: 10px;
+                top: 22px;
+                margin-left: 3px;
             }
         }
         .archived {
@@ -96,7 +107,7 @@
             border-top-left-radius: 5px;
             @include hover;
             @include respond(large) {
-                padding: 19px 29px;
+                padding: 19px 25px;
             }
             @include respond(medium) {
                 padding: 19px 20px;
