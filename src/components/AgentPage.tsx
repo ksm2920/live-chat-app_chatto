@@ -115,12 +115,24 @@ const AgentPage = () => {
         setShowOngoing(false)
         setShowArchived(true)
         setShow(true);
+        localStorage.clear();
     }
 
     const showArchivedChats = () => {
         setShowArchived(false)
         setShowOngoing(true)
         setShow(true);
+        localStorage.clear();
+        unsubscriberMessages();
+        setCurrentChatId("")
+    }
+
+    const showChatList = () => {
+        handleToggle();
+        setShow(true);
+        unsubscriberMessages();
+        setCurrentChatId("");
+        localStorage.clear();
     }
 
     const scrollToBottom = () => {
@@ -135,8 +147,11 @@ const AgentPage = () => {
         {agent ? (
             <div className="wrap">
                 <div className="header">
-                    <button onClick={() => { handleToggle(); setShow(true); unsubscriberMessages(); setCurrentChatId(""); localStorage.clear(); }} className="list-icon">
-                        <FiList />{currentChatId !== chatIdFromLS ? <span>{unreadMessages.length}</span> : <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
+                    <button onClick={showChatList} className="list-icon">
+                        <FiList />
+                        {currentChatId !== chatIdFromLS ?
+                            <span>{unreadMessages.length}</span> :
+                            <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
                     </button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
                 </div>
