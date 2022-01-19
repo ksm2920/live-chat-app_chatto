@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BiSupport } from "react-icons/bi";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
 import { FireClient } from "../FireClient";
@@ -179,9 +179,7 @@ const ChatModal = () => {
                                     <p className="error">
                                         Please enter a valid email
                                     </p>
-                                ) : (
-                                    ""
-                                )}
+                                ) : ("")}
                                 <label>Message</label>
                                 <textarea
                                     rows={5}
@@ -193,14 +191,12 @@ const ChatModal = () => {
                                     <p className="error">
                                         Please enter a message
                                     </p>
-                                ) : (
-                                    ""
-                                )}
+                                ) : ("")}
                             </form>
                             :
                             <>
                                 <ul>
-                                    <li>
+                                    <li key="agent">
                                         <div className="agent">
                                             <div><b>Agent</b></div>
                                             <p>Hello, thank you for using “Chatto” service. Can I help you with something?</p>
@@ -267,13 +263,13 @@ const ChatModal = () => {
             console.log('msgDate is', msgDate);
 
             return (
-                <>
+                <React.Fragment key={m.id}>
                     {<div><div className="date"> {msgDate}</div></div>}
-                    <li key={m.id}>
+                    <li>
                         <MessageItem message={m} />
                     </li>
                     <div ref={messagesEndRef} />
-                </>
+                </React.Fragment>
             )
         })
     }

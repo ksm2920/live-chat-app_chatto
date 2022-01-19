@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { FiList, FiLogOut } from "react-icons/fi";
 import { RiCloseFill, RiSendPlaneFill } from "react-icons/ri";
@@ -150,7 +151,7 @@ const AgentPage = () => {
                     <button onClick={showChatList} className="list-icon">
                         <FiList />
                         {currentChatId !== chatIdFromLS ?
-                            <span>{unreadMessages.length}</span> :
+                            <span>{unreadMessages.length}</span>:
                             <span>{unreadMessages.filter(m => m.chatId !== chatIdFromLS).length}</span>}
                     </button>
                     <button onClick={signOut} className="sign-out"><FiLogOut /></button>
@@ -244,13 +245,13 @@ const AgentPage = () => {
             console.log('msgDate is', msgDate);
 
             return (
-                <>
+                <React.Fragment key={m.id}>
                     {<div><div className="date"> {msgDate}</div></div>}
-                    <li key={m.id}>
+                    <li>
                         <MessageItem message={m} />
                     </li>
                     <div ref={messagesEndRef} />
-                </>
+                </React.Fragment>
             )
         })
     }
