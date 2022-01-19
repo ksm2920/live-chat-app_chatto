@@ -1,0 +1,101 @@
+@import "layout", "agent", "mixins", "modal","variable";
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two:ital@0;1&display=swap');
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-body::-webkit-scrollbar {
+    display: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.support-btn {
+    position: absolute;
+    bottom: 8%;
+    right: 5%;
+    button {
+        font-size: 40px;
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        border: none;
+        box-shadow: 1px 1px 5px $shadow-color;
+        background-color: $main-color;
+        height: 70px;
+        width: 70px;
+        cursor: pointer;
+    }
+}
+
+.container {
+    height: 90vh;
+    position: relative;
+    .login-form {
+        .chatto {
+            font-size: 60px;
+            font-family: "Lobster Two", cursive;
+        }
+        width: 30vw;
+        text-align: center;
+        padding: 40px 20px;
+        border: 1px solid lightgray;
+        box-shadow: 1px 1px 5px $shadow-color;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include respond(medium) {
+            width: 50vw;
+        }
+        @include respond(small) {
+            width: 80vw;
+        }
+        button {
+            height: 40px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 1px 1px 5px $shadow-color;
+        }
+    }
+}
+
+.date {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.sending-time {
+    position: relative;
+    color: gray;
+    font-size: 12px;
+    span {
+        font-size: 15px;
+    }
+    .unread {
+        position: absolute;
+        right: -20px;
+        color: darkgray;
+    }
+    .read {
+        position: absolute;
+        right: -20px;
+        color: #007d64;
+    }
+}
+
+.error {
+    color: $point-color;
+    padding: 0;
+    margin: 0;
+}

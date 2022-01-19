@@ -1,0 +1,106 @@
+@import "mixins", "variable";
+
+.chat-modal {
+    margin-top: 30vh;
+    float: right;
+    margin-right: 30px;
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    background-color: white;
+    @include respond(small) {
+        right: -10px;
+    }
+}
+
+.chat-box {
+    text-align: center;
+    width: 320px;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px $shadow-color;
+    position: relative;
+    .chat-header {
+        position: relative;
+        background-color: $main-color;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 5%;
+        h1 {
+            margin: 0;
+            font-size: 25px;
+            color: white;
+        }
+        .leave-btn {
+            @include archive-btn;
+            background-color: $main-color;
+            color: white;
+        }
+    }
+    .chat-body {
+        max-height: 380px;
+        @include message-box;
+        .agent {
+            text-align: left;
+            @include msg-box;
+            p {
+                margin-right: 20%;
+            }
+            .user-photo {
+                float: left;
+            }
+        }
+        .guest {
+            text-align: right;
+            @include msg-box;
+            p {
+                background-color: $sub-color1;
+                margin-left: 20%;
+            }
+            .sending-time {
+                right: 10px;
+            }
+            .user-name {
+                display: none;
+            }
+        }
+    }
+    .message-input {
+        @include message-input;
+        input {
+            width: 85%;
+        }
+        button {
+            right: 6%;
+            border-radius: 50%;
+            &:disabled {
+                color: darkgray;
+            }
+        }
+    }
+}
+
+.user-form {
+    text-align: center;
+    label {
+        text-align: left;
+        display: block;
+        padding: 20px;
+        padding-bottom: 5px;
+    }
+    input,
+    textarea {
+        margin: 0 15px 5px;
+        padding: 10px;
+        width: 80%;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 1px 1px 5px $shadow-color;
+    }
+    button {
+        padding: 10px;
+        margin: 10px;
+        width: 100px;
+        border-radius: 5px;
+    }
+}
