@@ -2,6 +2,8 @@
 Chatto enables an agent to chat with multiple customers simultaneously.
 
 ###  How to get started
+Firstly, Run `npm install`
+
 Run `npm start` to spawn a webserver on port 3000.
 
 To try the app locally:
